@@ -60,6 +60,15 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     alignItems: "center",
   },
+  default_button: {
+    flex: 1,
+    backgroundColor: "transparent",
+    borderBottomWidth: 6,
+    borderRightWidth: 4,
+    borderLeftWidth: 4,
+    alignSelf: "flex-end",
+    alignItems: "center",
+  },
   text: {
     fontSize: 18,
     fontWeight: "bold",
