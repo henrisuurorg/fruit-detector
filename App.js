@@ -6,10 +6,8 @@ import { shareAsync } from 'expo-sharing';
 export default function App() {
   let cameraRef = useRef();
   const [permission, requestPermission] = Camera.useCameraPermissions();
-  const [camera, setCamera] = useState(null);
+  const [camera, setCamera] = useState(CameraType.back);
   const [photo, setPhoto] = useState();
-  var isVisible = false;
-  var dummyText = "Null"
 
 
   if (!permission) {
@@ -27,18 +25,8 @@ export default function App() {
     );
   }
 
-  // the camera must be loaded in order to access the supported ratios
-  const setCameraReady = async() => {
-    if (!isRatioSet) {
-      await prepareRatio();
-    }
-  };
-
   function toggleCameraType() {
     setCamera(current => (current === CameraType.back ? CameraType.front : CameraType.back));
-  }
-  function toggleisVisible() {
-    console.debug("Photostring: " + photo.base64)
   }
 
   let takePic = async () => {
@@ -59,7 +47,7 @@ export default function App() {
           <TouchableOpacity style={styles.button_discard} onPress={() => setPhoto(undefined)}>
             <Text style={styles.text}>Discard</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button_identify} onPress={() => toggleisVisible()}>
+          <TouchableOpacity style={styles.button_identify}>
             <Text style={styles.text}>Identify</Text>
           </TouchableOpacity>
         </View>
@@ -70,12 +58,16 @@ export default function App() {
   return (
     <View style={styles.container}>
         <Camera
+          type={camera}
           style={styles.camera}
           ref={cameraRef}
         >
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.capture_button} onPress={takePic}>
             <Text style={styles.text}>Capture</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.capture_button} onPress={toggleCameraType}>
+            <Text style={styles.text}>Flip</Text>
           </TouchableOpacity>
         </View>
       </Camera>
