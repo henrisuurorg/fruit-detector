@@ -2,8 +2,8 @@ import { Camera, CameraType } from "expo-camera"
 import { useState, useEffect, useRef } from "react"
 import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { useIsFocused } from "@react-navigation/native"
-import getAspectRatio from "../utils/getAspectRatio.js"
-import findBestMatchingAspectRatio from "../utils/findBestMatchingAspectRatio.js"
+import getAspectRatio from "../../utils/getAspectRatio.js"
+import findBestMatchingAspectRatio from "../../utils/findBestMatchingAspectRatio.js"
 
 const CameraScreen = ({ navigation }) => {
   const [type, setType] = useState(CameraType.back)

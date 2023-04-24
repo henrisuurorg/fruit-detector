@@ -7,7 +7,7 @@ import {
   Dimensions,
 } from "react-native"
 import React, { useState } from "react"
-import styles from "../styles.js"
+import styles from "../../styles.js"
 import MovableSquare from "../components/MovableSquare.jsx"
 
 const window_width = Dimensions.get("window").width

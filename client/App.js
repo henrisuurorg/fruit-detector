@@ -1,5 +1,5 @@
-import Preview from "./screens/Preview"
-import CameraScreen from "./screens/Camera"
+import Preview from "./src/screens/Preview"
+import CameraScreen from "./src/screens/Camera"
 import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
