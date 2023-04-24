@@ -1,20 +1,18 @@
-import { Text, TouchableOpacity, View, Dimensions } from "react-native"
-import { useState, useEffect } from "react"
 import { Camera, CameraType } from "expo-camera"
-import styles from "../styles.js"
+import { useState, useEffect, useRef } from "react"
+import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { useIsFocused } from "@react-navigation/native"
 import getAspectRatio from "../utils/getAspectRatio.js"
 import findBestMatchingAspectRatio from "../utils/findBestMatchingAspectRatio.js"
 
-const CameraScreen = ({ takePic, cameraRef }) => {
-  const [camera, setCamera] = useState(CameraType.back)
-  const [cameraRatio, setCameraRatio] = useState(null)
+const CameraScreen = ({ navigation }) => {
+  const [type, setType] = useState(CameraType.back)
+  const [permission, requestPermission] = Camera.useCameraPermissions()
+  const [cameraRatio, setCameraRatio] = useState()
   const [isCameraReady, setIsCameraReady] = useState(false)
 
-  const toggleCameraType = () => {
-    setCamera((current) =>
-      current === CameraType.back ? CameraType.front : CameraType.back
-    )
-  }
+  const cameraRef = useRef()
+  const isFocused = useIsFocused()
 
   const onCameraReady = () => {
     setIsCameraReady(true)
@@ -38,29 +36,89 @@ const CameraScreen = ({ takePic, cameraRef }) => {
     setBestMatchingRatio()
   }, [cameraRef, isCameraReady])
 
+  if (!permission) {
+    // Camera permissions are still loading
+    return <View />
+  }
+
+  if (!permission.granted) {
+    // Camera permissions are not granted yet
+    return (
+      <View style={styles.container}>
+        <Text style={{ textAlign: "center" }}>
+          We need your permission to show the camera
+        </Text>
+        <Button onPress={requestPermission} title="grant permission" />
+      </View>
+    )
+  }
+
+  const takePic = async () => {
+    let options = {
+      quality: 1,
+      base64: true,
+      exif: false,
+    }
+    let newPhoto = await cameraRef.current.takePictureAsync(options)
+    navigation.navigate("Preview", {
+      photo: newPhoto,
+    })
+  }
+
+  const toggleCameraType = () => {
+    setType((current) =>
+      current === CameraType.back ? CameraType.front : CameraType.back
+    )
+  }
+
   return (
     <View style={styles.container}>
-      <Camera
-        type={camera}
-        style={styles.camera}
-        ref={cameraRef}
-        ratio={cameraRatio}
-        onCameraReady={onCameraReady}
-      >
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.capture_button} onPress={takePic}>
-            <Text style={styles.text}>Capture</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.capture_button}
-            onPress={toggleCameraType}
-          >
-            <Text style={styles.text}>Flip</Text>
-          </TouchableOpacity>
-        </View>
-      </Camera>
+      {isFocused && (
+        <Camera
+          type={type}
+          style={styles.camera}
+          ref={cameraRef}
+          ratio={cameraRatio}
+          onCameraReady={onCameraReady}
+        >
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
+              <Text style={styles.text}>Flip Camera</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={takePic}>
+              <Text>Capture</Text>
+            </TouchableOpacity>
+          </View>
+        </Camera>
+      )}
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  camera: {
+    flex: 1,
+  },
+  buttonContainer: {
+    flex: 1,
+    flexDirection: "row",
+    backgroundColor: "transparent",
+    margin: 64,
+  },
+  button: {
+    flex: 1,
+    alignSelf: "flex-end",
+    alignItems: "center",
+  },
+  text: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "white",
+  },
+})
 
 export default CameraScreen

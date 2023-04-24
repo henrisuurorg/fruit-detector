@@ -16,7 +16,7 @@ const window_height = Dimensions.get("window").height
 const startX = window_width / 2
 const startY = window_height / 2
 
-const DisplayPhoto = ({ photo, discardPhoto }) => {
+const Preview = ({ navigation, route }) => {
   const [position, setPosition] = useState({ x: startX, y: startY })
   const [squareLength, setLength] = useState({ length: 200 })
   return (
@@ -28,11 +28,14 @@ const DisplayPhoto = ({ photo, discardPhoto }) => {
     >
       <Image
         style={styles.preview}
-        source={{ uri: "data:image/jpg;base64," + photo.base64 }}
+        source={{ uri: "data:image/jpg;base64," + route.params.photo.base64 }}
       />
 
       <View style={styles.navBar}>
-        <TouchableOpacity style={styles.button_discard} onPress={discardPhoto}>
+        <TouchableOpacity
+          style={styles.button_discard}
+          onPress={() => navigation.navigate("Camera")}
+        >
           <Text style={styles.text}>Discard</Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -51,4 +54,4 @@ const DisplayPhoto = ({ photo, discardPhoto }) => {
     </SafeAreaView>
   )
 }
-export default DisplayPhoto
+export default Preview
