@@ -1,9 +1,10 @@
 import { Camera, CameraType } from "expo-camera"
 import { useState, useEffect, useRef } from "react"
-import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { Button, Text, TouchableOpacity, View } from "react-native"
 import { useIsFocused } from "@react-navigation/native"
-import getAspectRatio from "../../utils/getAspectRatio.js"
-import findBestMatchingAspectRatio from "../../utils/findBestMatchingAspectRatio.js"
+import getAspectRatio from "../../../utils/getAspectRatio.js"
+import findBestMatchingAspectRatio from "../../../utils/findBestMatchingAspectRatio.js"
+import CameraStyles from "./Camera.styles.js"
 
 const CameraScreen = ({ navigation }) => {
   const [type, setType] = useState(CameraType.back)
@@ -44,7 +45,7 @@ const CameraScreen = ({ navigation }) => {
   if (!permission.granted) {
     // Camera permissions are not granted yet
     return (
-      <View style={styles.container}>
+      <View style={CameraStyles.container}>
         <Text style={{ textAlign: "center" }}>
           We need your permission to show the camera
         </Text>
@@ -72,21 +73,24 @@ const CameraScreen = ({ navigation }) => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={CameraStyles.container}>
       {isFocused && (
         <Camera
           type={type}
-          style={styles.camera}
+          style={CameraStyles.camera}
           ref={cameraRef}
           ratio={cameraRatio}
           onCameraReady={onCameraReady}
         >
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
-              <Text style={styles.text}>Flip Camera</Text>
+          <View style={CameraStyles.buttonContainer}>
+            <TouchableOpacity
+              style={CameraStyles.button}
+              onPress={toggleCameraType}
+            >
+              <Text style={CameraStyles.text}>Flip Camera</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={takePic}>
-              <Text>Capture</Text>
+            <TouchableOpacity style={CameraStyles.button} onPress={takePic}>
+              <Text style={CameraStyles.text}>Capture</Text>
             </TouchableOpacity>
           </View>
         </Camera>
@@ -94,31 +98,5 @@ const CameraScreen = ({ navigation }) => {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-  },
-  camera: {
-    flex: 1,
-  },
-  buttonContainer: {
-    flex: 1,
-    flexDirection: "row",
-    backgroundColor: "transparent",
-    margin: 64,
-  },
-  button: {
-    flex: 1,
-    alignSelf: "flex-end",
-    alignItems: "center",
-  },
-  text: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "white",
-  },
-})
 
 export default CameraScreen

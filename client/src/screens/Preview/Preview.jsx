@@ -7,8 +7,8 @@ import {
   Dimensions,
 } from "react-native"
 import React, { useState } from "react"
-import styles from "../../styles.js"
-import MovableSquare from "../components/MovableSquare.jsx"
+import PreviewStyles from "./Preview.styles"
+import MovableSquare from "../../components/MovableSquare/MovableSquare.jsx"
 
 const window_width = Dimensions.get("window").width
 const window_height = Dimensions.get("window").height
@@ -22,27 +22,27 @@ const Preview = ({ navigation, route }) => {
   return (
     <SafeAreaView
       style={[
-        styles.container,
+        PreviewStyles.container,
         { justifyContent: "center", alignItems: "center" },
       ]}
     >
       <Image
-        style={styles.preview}
+        style={PreviewStyles.preview}
         source={{ uri: "data:image/jpg;base64," + route.params.photo.base64 }}
       />
 
-      <View style={styles.navBar}>
+      <View style={PreviewStyles.navBar}>
         <TouchableOpacity
-          style={styles.button_discard}
+          style={PreviewStyles.button_discard}
           onPress={() => navigation.navigate("Camera")}
         >
-          <Text style={styles.text}>Discard</Text>
+          <Text style={PreviewStyles.text}>Discard</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.button_identify}
+          style={PreviewStyles.button_identify}
           onPress={() => console.debug(position)}
         >
-          <Text style={styles.text}>Identify</Text>
+          <Text style={PreviewStyles.text}>Identify</Text>
         </TouchableOpacity>
       </View>
       <MovableSquare
