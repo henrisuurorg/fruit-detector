@@ -27,11 +27,11 @@ const DisplayPhoto = ({ photo, discardPhoto }) => {
         <TouchableOpacity style={styles.button_discard} onPress={discardPhoto}>
           <Text style={styles.text}>Discard</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button_identify}>
+        <TouchableOpacity style={styles.button_identify} onPress={() => console.debug(position)}>
           <Text style={styles.text}>Identify</Text>
         </TouchableOpacity>
       </View>
-      <MovableSquare position={position} setPosition={setPosition} squareLength={squareLength.length}></MovableSquare>
+      <MovableSquare position={position} setPosition={setPosition} squareLength={squareLength.length} setSquareLength={setLength}/>
     </SafeAreaView>
   )
 }
