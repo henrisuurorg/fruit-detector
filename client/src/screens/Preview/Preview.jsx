@@ -9,16 +9,35 @@ import {
 import React, { useState } from "react"
 import PreviewStyles from "./Preview.styles"
 import MovableSquare from "../../components/MovableSquare/MovableSquare.jsx"
+import ImageCropper from "../../utils/ImageCropper.js"
 
 const window_width = Dimensions.get("window").width
 const window_height = Dimensions.get("window").height
 
 const startX = window_width / 2
 const startY = window_height / 2
+const initialLength = 200;
+
+
+
 
 const Preview = ({ navigation, route }) => {
   const [position, setPosition] = useState({ x: startX, y: startY })
-  const [squareLength, setLength] = useState({ length: 200 })
+  const [squareLength, setLength] = useState({ initialLength })
+
+
+  const cropImage = async () => {
+    console.debug(squareLength.length)
+    let newPhoto =  await ImageCropper(photo=route.params.photo, x=position.x, y=position.y, length=squareLength)
+    navigation.navigate("CropView", {
+      navigation: this.navigation,
+      photo: newPhoto,
+    })
+  }
+
+
+
+
   return (
     <SafeAreaView
       style={[
@@ -40,7 +59,7 @@ const Preview = ({ navigation, route }) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={PreviewStyles.button_identify}
-          onPress={() => console.debug(position)}
+          onPress={() => cropImage()}
         >
           <Text style={PreviewStyles.text}>Identify</Text>
         </TouchableOpacity>
@@ -48,7 +67,7 @@ const Preview = ({ navigation, route }) => {
       <MovableSquare
         position={position}
         setPosition={setPosition}
-        squareLength={squareLength.length}
+        squareLength={initialLength}
         setSquareLength={setLength}
       />
     </SafeAreaView>
