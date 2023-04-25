@@ -6,53 +6,16 @@ from io import BytesIO
 from PIL import Image
 from tensorflow.keras.preprocessing import image
 
-
-class_names = ['apple',
- 'apricot',
- 'avocado',
- 'banana',
- 'bell pepper',
- 'black berry',
- 'black cherry',
- 'black currant',
- 'blueberry',
- 'cherry',
- 'clementine',
- 'cloudberry',
- 'cranberry',
- 'dragonfruit',
- 'eggplant',
- 'elderberry',
- 'gooseberry',
- 'kiwi',
- 'lemon',
- 'lime',
- 'lingonberry',
- 'mango',
- 'nectarine',
- 'olive',
- 'orange',
- 'papaya',
- 'pea',
- 'pear',
- 'pineapple',
- 'pomegranate',
- 'raspberry',
- 'strawberry',
- 'tomato',
- 'vanilla',
- 'watermelon',
- 'zucchini']
+class_names = ['apple','apricot','avocado','banana','bell pepper','black berry','black cherry','black currant','blueberry','cherry','clementine','cloudberry','cranberry','dragonfruit','eggplant','elderberry','gooseberry','kiwi','lemon','lime','lingonberry','mango','nectarine','olive','orange','papaya','pea','pear','pineapple','pomegranate','raspberry','strawberry','tomato','vanilla','watermelon','zucchini']
 
 app = Flask(__name__)
 model = keras.models.load_model('./model/')
-
 
 @app.route('/', methods=['GET'])
 def hello_world():
     return 'Send me an image!'
 
-@app.route('/', methods=['POST'])
+@app.route('/inference', methods=['POST'])
 def predict():
     imagefile = request.files['imagefile']
     image_bytes = imagefile.read()  # Read image file as bytes
