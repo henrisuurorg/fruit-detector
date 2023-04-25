@@ -51,6 +51,7 @@ const MovableSquare = ({ position, setPosition, squareLength }) => {
   })
   return (
     <View
+      testID="movable-square"
       style={[
         MovableSquareStyles.square,
         {
