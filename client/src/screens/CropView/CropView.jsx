@@ -1,40 +1,22 @@
-import { Camera, CameraType } from "expo-camera"
-import { useState, useEffect, useRef } from "react"
-import { View, Image, StyleSheet, Button } from "react-native"
+import { View, Image, Button } from "react-native"
+import CropStyles from "./CropView.styles"
 
 
 const CropView = ({ navigation, route }) => {
   return (
-    <View style={styles.imageContainer}>
+    <View style={CropStyles.imageContainer}>
       <Image
-        style={styles.image}
+        style={CropStyles.image}
         source={{ uri: route.params.photo }}
       />
       <Button
-        style={styles.container}
+        style={CropStyles.buttonContainer}
         title="Return"
+        color="#841584"
         onPress={() => navigation.navigate("Camera")}
       />
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-    },
-    imageContainer: {
-      flex: 2,
-      marginVertical: 20,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    image: {
-      width: 200,
-      height: 200,
-      resizeMode: 'contain',
-    },
-  });
 
 export default CropView

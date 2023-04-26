@@ -16,8 +16,10 @@ const ImageCropper = async ( photo, x, y, length ) => {
     const ratioH = imgHeight / height                   // Ratio of the Height
     const avgRatio = (ratioH + ratioW) / 2              // Average ratio to figure out the square length scaler
     
-    let relativeX = Math.round(x - (length / 2)) * ratioW;
-    let relativeY = Math.round(y - (length / 2)) * ratioH;
+    console.debug("ratioH: " + ratioH)
+    console.debug("ratioW: " + ratioW)
+    let relativeX = (x - (length / 2)) * ratioW;
+    let relativeY = (y - (length / 2)) * ratioH;
     let relativeLength = length * avgRatio;
     
     

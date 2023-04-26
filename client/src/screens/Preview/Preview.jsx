@@ -27,7 +27,6 @@ const Preview = ({ navigation, route }) => {
 
 
   const cropImage = async () => {
-    console.debug(squareLength.length)
     let newPhoto =  await ImageCropper(photo=route.params.photo, x=position.x, y=position.y, length=squareLength)
     navigation.navigate("CropView", {
       navigation: this.navigation,
