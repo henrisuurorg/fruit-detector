@@ -1,4 +1,4 @@
-import { SaveFormat, manipulateAsync } from 'expo-image-manipulator';
+import { manipulateAsync } from 'expo-image-manipulator';
 import { Dimensions } from 'react-native';
 
 
@@ -8,17 +8,19 @@ const ImageCropper = async ( photo, x, y, length ) => {
 
     // Image is captured at a higher quality than the screen allows.
     // To figure out the relative height and width, we must calculate the ratio between the two and multiply by it.
-    const { width, height } = Dimensions.get("window")  // Dimensions of the screen
-    const imgHeight = image.height;                     // Dimensions of the image
+    const { width, height } = Dimensions.get("window")              // Dimensions of the screen
+    const imgHeight = image.height;                                 // Dimensions of the image
     const imgWidth = image.width;                       
 
-    const ratioW = imgWidth / width;                    // Ratio of the Width
-    const ratioH = imgHeight / height                   // Ratio of the Height
-    const avgRatio = (ratioH + ratioW) / 2              // Average ratio to figure out the square length scaler
-    
-    console.debug("ratioH: " + ratioH)
-    console.debug("ratioW: " + ratioW)
-    let relativeX = (x - (length / 2)) * ratioW;
+    console.debug("Width: " + width);
+    console.debug("Height: " +  height);
+    console.debug("imgWidth: " + imgWidth);
+    console.debug("imgHeight: " + imgHeight);
+
+    const ratioW = parseFloat((imgWidth / width).toFixed(5));       // Ratio of the Width
+    const ratioH = parseFloat((imgHeight / height).toFixed(5));     // Ratio of the Height
+    const avgRatio = (ratioH + ratioW) / 2                          // Average ratio to figure out the square length scaler
+    let relativeX = (x  - (length / 2)) * ratioW;
     let relativeY = (y - (length / 2)) * ratioH;
     let relativeLength = length * avgRatio;
     
