@@ -10,12 +10,8 @@ const ImageCropper = async ( photo, x, y, length ) => {
     // To figure out the relative height and width, we must calculate the ratio between the two and multiply by it.
     const { width, height } = Dimensions.get("window")              // Dimensions of the screen
     const imgHeight = image.height;                                 // Dimensions of the image
-    const imgWidth = image.width;                       
-
-    console.debug("Width: " + width);
-    console.debug("Height: " +  height);
-    console.debug("imgWidth: " + imgWidth);
-    console.debug("imgHeight: " + imgHeight);
+    const imgWidth = image.width;     
+    
 
     const ratioW = parseFloat((imgWidth / width).toFixed(5));       // Ratio of the Width
     const ratioH = parseFloat((imgHeight / height).toFixed(5));     // Ratio of the Height

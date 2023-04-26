@@ -1,5 +1,6 @@
 import { View, Image, Button } from "react-native"
 import CropStyles from "./CropView.styles"
+import uploadImage from "../../utils/uploadImage.js"
 
 
 const CropView = ({ navigation, route }) => {
@@ -14,6 +15,13 @@ const CropView = ({ navigation, route }) => {
         title="Return"
         color="#841584"
         onPress={() => navigation.navigate("Camera")}
+      />
+      <Button
+        style={CropStyles.buttonContainer}
+        title="Upload"
+        color="#FF0000"
+        //onPress={() => uploadImage(route.params.photo)}
+        onPress={() => uploadImage(route.params.photo)}
       />
     </View>
   )

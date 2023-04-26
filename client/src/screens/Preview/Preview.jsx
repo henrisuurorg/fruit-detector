@@ -10,7 +10,6 @@ import React, { useState } from "react"
 import PreviewStyles from "./Preview.styles"
 import MovableSquare from "../../components/MovableSquare/MovableSquare.jsx"
 import ImageCropper from "../../utils/ImageCropper.js"
-import fetchtest from "../../utils/fetchtest.js"
 
 const window_width = Dimensions.get("window").width
 const window_height = Dimensions.get("window").height
@@ -24,7 +23,7 @@ const initialLength = 200;
 
 const Preview = ({ navigation, route }) => {
   const [position, setPosition] = useState({ x: startX, y: startY })
-  const [squareLength, setLength] = useState({ initialLength })
+  const [squareLength, setLength] = useState( initialLength )
 
 
   const cropImage = async () => {
@@ -59,7 +58,7 @@ const Preview = ({ navigation, route }) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={PreviewStyles.button_identify}
-          onPress={() => fetchtest()}
+          onPress={() => cropImage()}
         >
           <Text style={PreviewStyles.text}>Identify</Text>
         </TouchableOpacity>

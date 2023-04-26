@@ -1,33 +1,33 @@
 
-let uploadImage = async (singleFile) => {
-    //Check if any file is selected or not
-    if (singleFile != null) {
-      //If file selected then create FormData
-      const fileToUpload = singleFile;
-      const data = new FormData();
-      data.append('name', 'Image Upload');
-      data.append('file_attachment', fileToUpload);
-      let res = await fetch(
-        'http://localhost//webservice/user/uploadImage',  //our URL at this place
-        {
-          method: 'post',
-          body: data,
-          headers: {
-            'Content-Type': 'multipart/form-data; ',
-          },
-        }
-      );
 
-      // change to loading screen somehow
-
-      let responseJson = await res.json();
-      if (responseJson.status == 1) {  
-        alert('Upload Successful');
-        let resData = responseJson.data; //??
-        return resData //?
-      }
-    } else {
-      //if no file selected the show alert
-      alert('no file!!');
-    }
-};
+const uploadImage = async (singleFile) => {
+  console.debug("-------------------")
+  console.debug("Function called: uploadImage");
+  console.debug("singleFile: " + singleFile);
+  //Check if any file is selected or not
+  if (singleFile != null) {
+    //If file selected then create FormData
+    const formData = new FormData();
+    formData.append('imagefile', {
+      uri: singleFile,
+      type: 'image/jpeg',
+      name: 'image.jpg'
+    });
+    console.debug("Sending data.")
+    fetch('https://fruit-detector-4fuk.onrender.com/inference', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+    body: formData,
+    })
+    .then(response => response.text())
+    .then(result => {
+      console.debug('Predicted class:', result);
+    })
+    .catch(error => {
+      console.debug('Prediction error:', error);
+    });
+  };
+}
+export default uploadImage;
