@@ -1,0 +1,7 @@
+Flask==2.1.1
+numpy==1.21.1
+Pillow==9.5.0
+gunicorn==19.7.1
+protobuf==3.19.1
+tensorflow==2.9.0; sys_platform != 'darwin' or platform_machine != 'arm64'
+tensorflow-macos==2.9.0; sys_platform == 'darwin' and platform_machine == 'arm64'

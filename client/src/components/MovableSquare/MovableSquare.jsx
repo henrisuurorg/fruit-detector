@@ -5,7 +5,7 @@ import MovableSquareStyles from "./MovableSquare.styles"
 const window_width = Dimensions.get("window").width
 const window_height = Dimensions.get("window").height
 
-const MovableSquare = ({ position, setPosition, squareLength }) => {
+const MovableSquare = ({ position, setPosition, squareLength, setSquareLength }) => {
   const [scale, setScale] = useState(1)
   const [scaledLength, setScaleLength] = useState(squareLength)
 
@@ -34,6 +34,7 @@ const MovableSquare = ({ position, setPosition, squareLength }) => {
       if (tmp > window_width) {
         tmp = window_width
       }
+      setSquareLength(tmp)
       setScaleLength(tmp)
 
       //Move the square to the center of the tocuhEvent
