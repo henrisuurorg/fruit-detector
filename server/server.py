@@ -1,7 +1,3 @@
-# import os
-# import psutil
-# import threading
-# import time
 from flask import Flask, request
 import tensorflow as tf
 import numpy as np
@@ -57,10 +53,3 @@ def preprocess_image(image):
     # Scale the pixel values to the range [-1, 1]
     image = (image - 127.5) / 127.5
     return image
-
-# def memory_monitor():
-#     process = psutil.Process(os.getpid())
-#     while True:
-#         mem_info = process.memory_info()
-#         print(f"Current memory usage: {mem_info.rss / (1024 * 1024)} MB")
-#         time.sleep(5)  # Check memory usage every 5 seconds
