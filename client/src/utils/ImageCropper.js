@@ -10,23 +10,20 @@ const ImageCropper = async ( photo, x, y, length ) => {
     // To figure out the relative height and width, we must calculate the ratio between the two and multiply by it.
     const { width, height } = Dimensions.get("window")              // Dimensions of the screen
     const imgHeight = image.height;                                 // Dimensions of the image
-    const imgWidth = image.width;     
-    
+    const imgWidth = image.width;                       
 
     const ratioW = parseFloat((imgWidth / width).toFixed(5));       // Ratio of the Width
     const ratioH = parseFloat((imgHeight / height).toFixed(5));     // Ratio of the Height
     //const avgRatio = (ratioH + ratioW) / 2                          // Average ratio to figure out the square length scaler
     let relativeX = (x  - (length / 2)) * ratioW;
-    let relativeY = (y - (length / 2)) * ratioH;
-    let relativeLength = length * ratioH;
-    let relativeWidth = length * ratioW;
-    
-    
+    let relativeY = (y - (length / 2)) * ratioH - (Math.abs(height - imgHeight/ratioW))*2;
+    let relativeLength = length * ratioW;
+      
     // The actual cropping of the image
     const { uri: CropResult } = await manipulateAsync(
         image.uri,
         [
-            {crop: {height: relativeLength, originX: relativeX, originY: relativeY,  width: relativeWidth}},
+            {crop: {height: relativeLength, originX: relativeX, originY: relativeY,  width: relativeLength}},
             {resize: {height: 224, width: 224}}
         ],
         {base64: true}
