@@ -10,6 +10,7 @@ import React, { useState } from "react"
 import PreviewStyles from "./Preview.styles"
 import MovableSquare from "../../components/MovableSquare/MovableSquare.jsx"
 import ImageCropper from "../../utils/ImageCropper.js"
+import fetchtest from "../../utils/fetchtest.js"
 
 const window_width = Dimensions.get("window").width
 const window_height = Dimensions.get("window").height
@@ -58,7 +59,7 @@ const Preview = ({ navigation, route }) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={PreviewStyles.button_identify}
-          onPress={() => cropImage()}
+          onPress={() => fetchtest()}
         >
           <Text style={PreviewStyles.text}>Identify</Text>
         </TouchableOpacity>
