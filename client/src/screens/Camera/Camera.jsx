@@ -62,6 +62,7 @@ const CameraScreen = ({ navigation }) => {
     }
     let newPhoto = await cameraRef.current.takePictureAsync(options)
     navigation.navigate("Preview", {
+      navigation: this.navigation,
       photo: newPhoto,
     })
   }
