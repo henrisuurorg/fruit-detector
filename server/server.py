@@ -8,6 +8,8 @@ import numpy as np
 from io import BytesIO
 from PIL import Image
 from tensorflow.keras.preprocessing import image
+from gunicorn.app.base import BaseApplication
+
 
 class_names = ['apple','apricot','avocado','banana','bell pepper','black berry','black cherry','black currant','blueberry','cherry','clementine','cloudberry','cranberry','dragonfruit','eggplant','elderberry','gooseberry','kiwi','lemon','lime','lingonberry','mango','nectarine','olive','orange','papaya','pea','pear','pineapple','pomegranate','raspberry','strawberry','tomato','vanilla','watermelon','zucchini']
 
@@ -62,9 +64,3 @@ def preprocess_image(image):
 #         mem_info = process.memory_info()
 #         print(f"Current memory usage: {mem_info.rss / (1024 * 1024)} MB")
 #         time.sleep(5)  # Check memory usage every 5 seconds
-
-if __name__ == '__main__':
-    # monitor_thread = threading.Thread(target=memory_monitor, daemon=True)
-    # monitor_thread.start()
-    
-    app.run(port=3000, debug=True)
