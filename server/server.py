@@ -46,6 +46,7 @@ def predict():
     except ValueError:
         result = {
             "fruit": prediction_class,
+            "ripeness": None
         }
 
     return result
