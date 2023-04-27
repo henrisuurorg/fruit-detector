@@ -10,6 +10,7 @@ import React, { useState } from "react"
 import PreviewStyles from "./Preview.styles"
 import MovableSquare from "../../components/MovableSquare/MovableSquare.jsx"
 import ImageCropper from "../../utils/ImageCropper.js"
+import uploadImage from "../../utils/uploadImage"
 
 const window_width = Dimensions.get("window").width
 const window_height = Dimensions.get("window").height
@@ -19,18 +20,27 @@ const startY = window_height / 2
 const initialLength = 200;
 
 
-
-
 const Preview = ({ navigation, route }) => {
   const [position, setPosition] = useState({ x: startX, y: startY })
   const [squareLength, setLength] = useState( initialLength )
 
 
   const cropImage = async () => {
+    //crop the image and send to the server and then navigate to the result screen
+
+    //crop the image
     let newPhoto =  await ImageCropper(photo=route.params.photo, x=position.x, y=position.y, length=squareLength)
-    navigation.navigate("CropView", {
-      navigation: this.navigation,
-      photo: newPhoto,
+    
+    //upload to server
+    uploadImage(newPhoto)
+    .then(fruit => {
+      navigation.navigate("Results", {
+        navigation: this.navigation,
+        fruit: fruit
+      })
+    })
+    .catch(error => {
+      console.debug(error);
     })
   }
 
