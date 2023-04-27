@@ -1,55 +1,52 @@
 from flask import Flask, request
 import tensorflow as tf
-import numpy as np
 from io import BytesIO
-from PIL import Image
-from tensorflow.keras.preprocessing import image
-from gunicorn.app.base import BaseApplication
 
-
-class_names = ['apple','apricot','avocado','banana','bell pepper','black berry','black cherry','black currant','blueberry','cherry','clementine','cloudberry','cranberry','dragonfruit','eggplant','elderberry','gooseberry','kiwi','lemon','lime','lingonberry','mango','nectarine','olive','orange','papaya','pea','pear','pineapple','pomegranate','raspberry','strawberry','tomato','vanilla','watermelon','zucchini']
+from utils.predict import predict_image  # Import the predict_image function
+from utils.class_names import ripeness_class_names, detection_class_names  # Import the ripeness_class_names dictionary
 
 app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
-def hello_world():
+def index_message():
     return 'Send me an image!'
 
 @app.route('/inference', methods=['POST'])
 def predict():
-    # Load the TFLite model from the file
-    tflite_model_file = "optimized_model.tflite"
+    # Load the first detection model from the file
+    tflite_model_file = "models/detection.tflite"
     interpreter = tf.lite.Interpreter(model_path=tflite_model_file)
 
-    # Allocate tensors
+    # Allocate tensors for the first model
     interpreter.allocate_tensors()
 
-    # Get input and output details
-    input_details = interpreter.get_input_details()
-    output_details = interpreter.get_output_details()
-
     imagefile = request.files['imagefile']
-    image_bytes = imagefile.read()  # Read image file as bytes
+    image_bytes = BytesIO(imagefile.read())  # Read image file as bytes
 
-    img = Image.open(BytesIO(image_bytes))  # Open image from byte stream
-    img = img.resize((224, 224))  # Resize image to target size
-    img_array = image.img_to_array(img)
-    img_batch = np.expand_dims(img_array, axis=0)
-    preprocessed_img_batch = preprocess_image(img_batch)
+    # Make a prediction using the first model
+    prediction_class = predict_image(interpreter, image_bytes, detection_class_names)
 
-    # Set the input tensor for the interpreter
-    interpreter.set_tensor(input_details[0]['index'], preprocessed_img_batch)
+    # Attempt to load the second model based on the result from the first one
+    try:
+        tflite_model_file_ripeness = f"models/ripeness/{prediction_class}.tflite"
+        interpreter_ripeness = tf.lite.Interpreter(model_path=tflite_model_file_ripeness)
 
-    # Invoke the interpreter to run the prediction
-    interpreter.invoke()
+        # Allocate tensors for the second model
+        interpreter_ripeness.allocate_tensors()
 
-    # Extract the output tensor and post-process the results
-    output_data = interpreter.get_tensor(output_details[0]['index'])
-    class_labels = np.argmax(output_data, axis=1)
+        # Make a prediction using the second model
+        prediction_class_names = ripeness_class_names.get(prediction_class)
+        prediction_ripeness = predict_image(interpreter_ripeness, image_bytes, prediction_class_names)
 
-    return class_names[class_labels[0]]
+        # Combine the results from both predictions
+        result = {
+            "fruit": prediction_class,
+            "ripeness": prediction_ripeness
+        }
+    except ValueError:
+        result = {
+            "fruit": prediction_class,
+            "ripeness": None
+        }
 
-def preprocess_image(image):
-    # Scale the pixel values to the range [-1, 1]
-    image = (image - 127.5) / 127.5
-    return image
+    return result
