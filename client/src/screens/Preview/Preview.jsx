@@ -36,7 +36,8 @@ const Preview = ({ navigation, route }) => {
     .then(fruit => {
       navigation.navigate("Results", {
         navigation: this.navigation,
-        fruit: fruit
+        fruit: fruit,
+        image: newPhoto
       })
     })
     .catch(error => {

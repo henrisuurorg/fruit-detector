@@ -2,6 +2,7 @@
 const uploadImage = async (singleFile) => {
   //create promise for the race conditions in the app
   return new Promise((resolve, reject) => {
+    console.debug("Sending data")
     //Check if any file is selected or not
     if (singleFile != null) {
       //If file selected then create FormData
