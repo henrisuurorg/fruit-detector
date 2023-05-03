@@ -12,8 +12,7 @@ const uploadImage = async (singleFile) => {
         type: 'image/jpeg',
         name: 'image.jpg'
       });
-      //url = "https://fruit-detector-4fuk.onrender.com/inference"
-      url = "http://130.229.148.138:4242"
+      url = "https://fruit-detector-4fuk.onrender.com/inference"
       fetch(url, {
       method: 'POST',
       headers: {

@@ -4,6 +4,10 @@ import { Text, View } from 'react-native';
 const MyComponent = (input) => {
   data = input.data
   style = input.style
+  // Do nothing if the data object does not exist
+  if (data == null) {
+    return
+  }
 
   const renderDataElements = () => {
     if (data.length < 1) {
