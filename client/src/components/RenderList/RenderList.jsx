@@ -4,7 +4,15 @@ import { Text, View } from 'react-native';
 const MyComponent = (input) => {
   data = input.data
   style = input.style
+
   const renderDataElements = () => {
+    if (data.length < 1) {
+      return (
+        <View>
+          <Text style={style}>None</Text>
+        </View>
+      )
+    }
     return data.map((item, index) => {
       return (
         <View key={index}>
