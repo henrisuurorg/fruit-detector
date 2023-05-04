@@ -17,36 +17,36 @@ const window_height = Dimensions.get("window").height
 
 const startX = window_width / 2
 const startY = window_height / 2
-const initialLength = 200;
-
+const initialLength = 200
 
 const Preview = ({ navigation, route }) => {
   const [position, setPosition] = useState({ x: startX, y: startY })
-  const [squareLength, setLength] = useState( initialLength )
-
+  const [squareLength, setLength] = useState(initialLength)
 
   const cropImage = async () => {
     //crop the image and send to the server and then navigate to the result screen
 
     //crop the image
-    let newPhoto =  await ImageCropper(photo=route.params.photo, x=position.x, y=position.y, length=squareLength)
-    
+    let newPhoto = await ImageCropper(
+      (photo = route.params.photo),
+      (x = position.x),
+      (y = position.y),
+      (length = squareLength)
+    )
+
     //upload to server
     uploadImage(newPhoto)
-    .then(fruit => {
-      navigation.navigate("Results", {
-        navigation: this.navigation,
-        fruit: fruit,
-        image: newPhoto
+      .then((fruit) => {
+        navigation.navigate("Results", {
+          navigation: this.navigation,
+          fruit: fruit,
+          image: newPhoto,
+        })
       })
-    })
-    .catch(error => {
-      console.debug(error);
-    })
+      .catch((error) => {
+        console.debug(error)
+      })
   }
-
-
-
 
   return (
     <SafeAreaView
