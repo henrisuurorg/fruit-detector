@@ -1,22 +1,52 @@
-import { Camera, CameraType } from "expo-camera"
+import { Camera, CameraType, FlashMode } from "expo-camera"
+import * as ImagePicker from "expo-image-picker"
 import { useState, useEffect, useRef } from "react"
-import { Button, Text, TouchableOpacity, View } from "react-native"
+import { Button, Text, TouchableOpacity, View, Image } from "react-native"
 import { useIsFocused } from "@react-navigation/native"
 import getAspectRatio from "../../utils/getAspectRatio.js"
 import findBestMatchingAspectRatio from "../../utils/findBestMatchingAspectRatio.js"
 import CameraStyles from "./Camera.styles.js"
+import flashOnIcon from "../../../assets/flashOnIcon.png"
+import flashOffIcon from "../../../assets/flashOffIcon.png"
+import galleryIcon from "../../../assets/galleryIcon.png"
 
 const CameraScreen = ({ navigation }) => {
-  const [type, setType] = useState(CameraType.back)
   const [permission, requestPermission] = Camera.useCameraPermissions()
   const [cameraRatio, setCameraRatio] = useState()
   const [isCameraReady, setIsCameraReady] = useState(false)
+  const [flash, setFlash] = useState(FlashMode.off)
 
   const cameraRef = useRef()
   const isFocused = useIsFocused()
-  
+
   const onCameraReady = () => {
     setIsCameraReady(true)
+  }
+
+  const toggleFlash = () => {
+    if (flash === FlashMode.off) {
+      setFlash(FlashMode.on)
+    } else {
+      setFlash(FlashMode.off)
+    }
+  }
+
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: false,
+      aspect: [4, 3],
+      base64: true,
+      quality: 1,
+    })
+
+    if (!result.canceled) {
+      navigation.navigate("Preview", {
+        navigation: this.navigation,
+        photo: result.assets[0],
+      })
+    }
   }
 
   useEffect(() => {
@@ -67,31 +97,40 @@ const CameraScreen = ({ navigation }) => {
     })
   }
 
-  const toggleCameraType = () => {
-    setType((current) =>
-      current === CameraType.back ? CameraType.front : CameraType.back
-    )
-  }
-
   return (
     <View style={CameraStyles.container}>
       {isFocused && (
         <Camera
-          type={type}
           style={CameraStyles.camera}
           ref={cameraRef}
           ratio={cameraRatio}
           onCameraReady={onCameraReady}
+          flashMode={flash}
         >
           <View style={CameraStyles.buttonContainer}>
             <TouchableOpacity
-              style={CameraStyles.button}
-              onPress={toggleCameraType}
+              style={CameraStyles.iconButton}
+              onPress={pickImage}
             >
-              <Text style={CameraStyles.text}>Flip Camera</Text>
+              <Image source={galleryIcon} style={CameraStyles.icon} />
             </TouchableOpacity>
-            <TouchableOpacity style={CameraStyles.button} onPress={takePic}>
-              <Text style={CameraStyles.text}>Capture</Text>
+
+            <View style={CameraStyles.captureButtonWrapper}>
+              <TouchableOpacity
+                onPress={takePic}
+                style={CameraStyles.captureButton}
+              ></TouchableOpacity>
+            </View>
+
+            <TouchableOpacity
+              style={CameraStyles.iconButton}
+              onPress={toggleFlash}
+            >
+              {flash === FlashMode.off ? (
+                <Image source={flashOffIcon} style={CameraStyles.icon} />
+              ) : (
+                <Image source={flashOnIcon} style={CameraStyles.icon} />
+              )}
             </TouchableOpacity>
           </View>
         </Camera>
