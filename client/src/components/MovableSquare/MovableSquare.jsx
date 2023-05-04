@@ -1,11 +1,11 @@
 import React, { useState } from "react"
-import { View, PanResponder, Dimensions } from "react-native"
+import { View, PanResponder, Dimensions, Image, ImageBackground } from "react-native"
 import MovableSquareStyles from "./MovableSquare.styles"
 
-const window_width = Dimensions.get("window").width
-const window_height = Dimensions.get("window").height
+const window_width = Dimensions.get("screen").width
+const window_height = Dimensions.get("screen").height
 
-const MovableSquare = ({ position, setPosition, squareLength, setSquareLength }) => {
+const MovableSquare = ({ position, setPosition, squareLength, setSquareLength, photo }) => {
   const [scale, setScale] = useState(1)
   const [scaledLength, setScaleLength] = useState(squareLength)
 
@@ -52,7 +52,6 @@ const MovableSquare = ({ position, setPosition, squareLength, setSquareLength })
   })
   return (
     <View
-      testID="movable-square"
       style={[
         MovableSquareStyles.square,
         {
@@ -63,7 +62,20 @@ const MovableSquare = ({ position, setPosition, squareLength, setSquareLength })
         },
       ]}
       {...panResponder.panHandlers}
-    />
+    >
+      <Image
+        style={[
+          MovableSquareStyles.imageOverlay,
+          {
+            left: (position.x - scaledLength / 2) * -1,
+            top: (position.y - scaledLength / 2) * -1,
+            width: window_width,
+            height: window_height,
+          }
+        ]}
+        source={{ uri: "data:image/jpg;base64," + photo.base64 }}
+      />
+    </View>
   )
 }
 
