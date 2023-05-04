@@ -17,8 +17,11 @@ import {
     const alts = result["alts"]
     let ripen = result["ripeness"]
     if (ripen == null) {
-      ripen = "Unkown"
+      ripen = "Unknown"
+    } else {
+      ripen = ripen["prediction"].class
     }
+    
     return (
       <View style = {ResultsStyles.background}>
         <View style={ResultsStyles.contentField}>
