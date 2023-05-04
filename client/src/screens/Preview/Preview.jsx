@@ -13,8 +13,8 @@ import uploadImage from "../../utils/uploadImage"
 import confirmButton from "../../../assets/preview_ok_button.png"
 import returnButton from "../../../assets/preview_return_button.png"
 
-const window_width = Dimensions.get("window").width
-const window_height = Dimensions.get("window").height
+const window_width = Dimensions.get("screen").width
+const window_height = Dimensions.get("screen").height
 
 const startX = window_width / 2
 const startY = window_height / 2

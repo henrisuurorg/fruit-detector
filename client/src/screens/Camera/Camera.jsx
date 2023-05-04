@@ -1,7 +1,7 @@
-import { Camera, CameraType, FlashMode } from "expo-camera"
+import { Camera, FlashMode } from "expo-camera"
 import * as ImagePicker from "expo-image-picker"
 import { useState, useEffect, useRef } from "react"
-import { Button, Text, TouchableOpacity, View, Image } from "react-native"
+import { Button, Text, TouchableOpacity, View, Image, Platform } from "react-native"
 import { useIsFocused } from "@react-navigation/native"
 import getAspectRatio from "../../utils/getAspectRatio.js"
 import findBestMatchingAspectRatio from "../../utils/findBestMatchingAspectRatio.js"
@@ -52,15 +52,16 @@ const CameraScreen = ({ navigation }) => {
   useEffect(() => {
     const setBestMatchingRatio = async () => {
       const aspectRatio = getAspectRatio()
-
-      if (cameraRef.current && isCameraReady) {
-        const supportedRatios =
-          await cameraRef.current.getSupportedRatiosAsync()
-        const bestRatio = findBestMatchingAspectRatio(
-          supportedRatios,
-          aspectRatio
-        )
-        setCameraRatio(bestRatio)
+      if (Platform.OS == 'android') {
+        if (cameraRef.current && isCameraReady) {
+          const supportedRatios =
+            await cameraRef.current.getSupportedRatiosAsync()
+          const bestRatio = findBestMatchingAspectRatio(
+            supportedRatios,
+            aspectRatio
+          )
+          setCameraRatio(bestRatio)
+        }
       }
     }
 
