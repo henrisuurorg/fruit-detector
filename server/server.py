@@ -12,7 +12,7 @@ app = Flask(__name__)
 def index_message():
     return 'Send me an image!'
 
-@app.route('/', methods=['POST'])
+@app.route('/inference', methods=['POST'])
 def predict():
     # Load the first detection model from the file
     tflite_model_file = "models/detection.tflite"
@@ -57,8 +57,8 @@ def predict():
             "confidence": prediction_class["prediction"]["confidence"],
             "alts": prediction_alts
         }
-    app.logger.info(f"\n{result}")
+        
     return result
 
-if __name__ == "__main__": 
-    app.run(host="130.229.148.138", port="4242", debug=True)
+#if __name__ == "__main__": 
+#   app.run(host="130.229.148.138", port="4242", debug=True)
