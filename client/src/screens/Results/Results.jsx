@@ -1,46 +1,53 @@
-import {
-    Text,
-    TouchableOpacity,
-    View,
-    Button,
-    Image,
-  } from "react-native"
-  import React, { useState } from "react"
-  import ResultsStyles from "./Results.styles"
-  import RenderList from "../../components/RenderList/RenderList"
-  
+import { View, ScrollView } from "react-native"
+import React from "react"
+import ResultsStyles from "./Results.styles"
+import fruitEmojis from "../../utils/fruitEmojis"
+import BaseText from "../../components/BaseText/BaseText"
+import AltFruitList from "../../components/AltFruitList/AltFruitList"
+import RipenessList from "../../components/RipenessList/RipenessList"
+import ResultButton from "../../components/ResultButton/ResultButton"
+import backToCameraIcon from "../../../assets/backToCameraIcon.png"
+import cropAgainIcon from "../../../assets/cropAgainIcon.png"
 
-  const ResultScreen = ({ navigation, route }) => {
-    const result = JSON.parse(route.params.fruit)
-    const fruit = result["fruit"]
-    const confi = result["confidence"]
-    const alts = result["alts"]
-    let ripen = result["ripeness"]
-    if (ripen == null) {
-      ripen = "Unknown"
-    } else {
-      ripen = ripen["prediction"].class
-    }
-    
-    return (
-      <View style = {ResultsStyles.background}>
-        <View style={ResultsStyles.contentField}>
-          <Image
-            style={ResultsStyles.image}
-            //source={require('../../../assets/AppIcon.png')}
-            source={{ uri: route.params.image }}
-          />
-          <View style = {ResultsStyles.textContainer}> 
-            <Text style = {ResultsStyles.text}>Result: {fruit}</Text>
-            <Text style = {ResultsStyles.text}>Confidence: {confi}</Text>
-            <Text style = {ResultsStyles.text}>Ripeness: {ripen}</Text>
-            <Button  title="New Picture" onPress={() => navigation.navigate("Camera")} color="#495432"/>
-            <RenderList data={alts} style={ResultsStyles.text}></RenderList>
-          </View>
-        </View>
-        
+const ResultScreen = ({ navigation, route }) => {
+  const result = JSON.parse(route.params.fruit)
+  const fruit = result["fruit"]
+  const confi = result["confidence"]
+  const alts = result["alts"]
+  let ripen = result["ripeness"]
+
+  return (
+    <ScrollView style={ResultsStyles.container}>
+      <BaseText
+        style={{
+          fontSize: 40,
+          textTransform: "capitalize",
+          fontWeight: "400",
+          marginTop: 40,
+        }}
+      >{`${fruitEmojis[fruit]} ${fruit}`}</BaseText>
+      <View style={ResultsStyles.innerContainer}>
+        <AltFruitList fruit={fruit} alts={alts} confi={confi} />
       </View>
-    )
-  }
-  export default ResultScreen
-
+      <View style={ResultsStyles.innerContainer}>
+        <RipenessList fruit={fruit} ripeness={ripen} />
+      </View>
+      <View style={ResultsStyles.innerContainer}>
+        <BaseText>Not the result you are looking for?</BaseText>
+        <ResultButton
+          title="Back to Camera"
+          onPress={() => navigation.navigate("Camera")}
+          style={{ marginTop: 20 }}
+          icon={backToCameraIcon}
+        />
+        <ResultButton
+          title="Crop Again"
+          onPress={() => navigation.goBack()}
+          style={{ marginTop: 10 }}
+          icon={cropAgainIcon}
+        />
+      </View>
+    </ScrollView>
+  )
+}
+export default ResultScreen
