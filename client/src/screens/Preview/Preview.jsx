@@ -1,8 +1,6 @@
 import {
-  Text,
   TouchableOpacity,
   View,
-  SafeAreaView,
   Image,
   Dimensions,
 } from "react-native"
@@ -11,6 +9,9 @@ import PreviewStyles from "./Preview.styles"
 import MovableSquare from "../../components/MovableSquare/MovableSquare.jsx"
 import ImageCropper from "../../utils/ImageCropper.js"
 import uploadImage from "../../utils/uploadImage"
+
+import confirmButton from "../../../assets/preview_ok_button.png"
+import returnButton from "../../../assets/preview_return_button.png"
 
 const window_width = Dimensions.get("window").width
 const window_height = Dimensions.get("window").height
@@ -47,40 +48,39 @@ const Preview = ({ navigation, route }) => {
         console.debug(error)
       })
   }
-
   return (
-    <SafeAreaView
-      style={[
-        PreviewStyles.container,
-        { justifyContent: "center", alignItems: "center" },
-      ]}
-    >
+    <View style={PreviewStyles.container}>
       <Image
         style={PreviewStyles.preview}
         source={{ uri: "data:image/jpg;base64," + route.params.photo.base64 }}
       />
+      <View style={PreviewStyles.overlay}/>
+      <View style={PreviewStyles.buttonContainer}>
+            <TouchableOpacity
+              id="Return Button"
+              style={PreviewStyles.iconButton}
+              onPress={() => navigation.navigate("Camera")}
+            >
+              <Image source={returnButton} style={PreviewStyles.icon} />
+            </TouchableOpacity>
 
-      <View style={PreviewStyles.navBar}>
-        <TouchableOpacity
-          style={PreviewStyles.button_discard}
-          onPress={() => navigation.navigate("Camera")}
-        >
-          <Text style={PreviewStyles.text}>Discard</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={PreviewStyles.button_identify}
-          onPress={() => cropImage()}
-        >
-          <Text style={PreviewStyles.text}>Identify</Text>
-        </TouchableOpacity>
+            <TouchableOpacity
+              id="Confirm Button"
+              style={PreviewStyles.iconButton}
+              onPress={cropImage}
+            >
+              <Image source={confirmButton} style={PreviewStyles.icon} />
+            </TouchableOpacity>
       </View>
       <MovableSquare
         position={position}
         setPosition={setPosition}
         squareLength={initialLength}
         setSquareLength={setLength}
-      />
-    </SafeAreaView>
+        photo={route.params.photo}
+      >
+      </MovableSquare>
+    </View>
   )
 }
 export default Preview
