@@ -14,7 +14,9 @@ const ResultScreen = ({ navigation, route }) => {
   const fruit = result["fruit"]
   const confi = result["confidence"]
   const alts = result["alts"]
-  let ripen = result["ripeness"]
+  const ripen = result["ripeness"]
+    ? result["ripeness"]["prediction"].class
+    : null
 
   return (
     <ScrollView style={ResultsStyles.container}>
@@ -33,7 +35,10 @@ const ResultScreen = ({ navigation, route }) => {
         <RipenessList fruit={fruit} ripeness={ripen} />
       </View>
       <View style={ResultsStyles.innerContainer}>
-        <BaseText>Not the result you are looking for?</BaseText>
+        <BaseText>Want to scan again?</BaseText>
+        <BaseText style={{ marginTop: 10 }}>
+          Not the result you are looking for?
+        </BaseText>
         <ResultButton
           title="Back to Camera"
           onPress={() => navigation.navigate("Camera")}
