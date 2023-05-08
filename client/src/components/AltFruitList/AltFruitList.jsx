@@ -1,6 +1,7 @@
 import { View } from "react-native"
 import BaseText from "../BaseText/BaseText"
 import fruitEmojis from "../../utils/fruitEmojis"
+import addArticle from "../../utils/addArticle"
 
 const renderItem = (item) => (
   <BaseText key={item.class}>{`\t${fruitEmojis[item.class]} ${
@@ -15,7 +16,7 @@ const AltFruitList = ({ fruit, alts, confi }) => {
   return (
     <View>
       <BaseText>
-        According to the model this is a {fruit} with
+        According to the model this is {addArticle(fruit)} with
         <BaseText style={{ fontWeight: "400" }}> {confi} confidence</BaseText>.
       </BaseText>
       {alts.length > 0 && (

@@ -1,6 +1,7 @@
 import { View } from "react-native"
 import BaseText from "../BaseText/BaseText"
 import fruitRipenessInfo from "../../utils/fruitRipenessInfo"
+import addArticle from "../../utils/addArticle"
 
 const renderItem = (item) => (
   <BaseText key={item} style={{ fontWeight: "400", marginTop: 5 }}>
@@ -18,12 +19,13 @@ const AltFruitList = ({ fruit, ripeness }) => {
         </BaseText>
       ) : (
         <BaseText>
-          Our model unfortunately cannot identify the ripeness of a {fruit} yet,
+          Our model unfortunately cannot identify the ripeness of{" "}
+          {addArticle(fruit)} yet,
           <BaseText style={{ fontWeight: "400" }}> however:</BaseText>
         </BaseText>
       )}
       <BaseText style={{ marginTop: 20 }}>
-        To identify if a {fruit} is ripe:
+        To identify if {addArticle(fruit)} is ripe:
       </BaseText>
       {fruitRipenessInfo[fruit].map(renderItem)}
     </View>
