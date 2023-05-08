@@ -109,95 +109,95 @@ const fruitRipenessInfo = {
     "smell it: Ripe kiwifruit will have a sweet aroma."
   ],
   lemon: [
-    "check its color - should be bright yellow",
+    "check its color - should be bright yellow in color, with no green or brown areas on the skin.",
     "give it a gentle squeeze - should have a little give",
-    "smell it - should have a sweet, citrusy aroma",
-  ],
+    "smell it - should have a Fresch, citrusy aroma",
+  ],//Done
   lime: [
-    "check its color - should be bright green",
+    "check its color - Should be bright green in color, with no yellow or brown areas on the skin.",
     "give it a gentle squeeze - should have a little give",
     "smell it - should have a sweet, citrusy aroma",
-  ],
+  ],//Done
   lingonberry: [
-    "check its color - should be bright orange",
+    "check its color - should be bright red in color, with no green",
     "give it a gentle squeeze - should have a little give",
-    "smell it - should have a sweet, citrusy aroma",
-  ],
+    "Taste it - should be tart and slightly sweet, with a pleasant texture",
+  ],//Done
   mango: [
     "check its color - should be bright orange",
-    "give it a gentle squeeze - should have a little give",
-    "smell it - should have a sweet, citrusy aroma",
-  ],
+    "give it a gentle squeeze - should feel slightly soft to the touch, especially near the stem. The skin should be smooth and free of any bruises or blemishes.",
+    "smell it - Sniff the base it should give you a sweet, tropical aroma",
+  ],//Done
   nectarine: [
     "check its color - should be bright orange",
     "give it a gentle squeeze - should have a little give",
     "smell it - should have a sweet, citrusy aroma",
-  ],
+  ],//Done
   olive: [
-    "check its color - should be bright orange",
-    "give it a gentle squeeze - should have a little give",
-    "smell it - should have a sweet, citrusy aroma",
-  ],
+    "Table olives: Table olives are typically harvested when they are fully ripe, but not overripe. They should be plump and firm to the touch, with a shiny and smooth skin. The color of the olives will depend on the variety, but in general, ripe table olives will be a deep purple or black color.",
+    "Olive oil: For olive oil production, the olives are typically harvested when they are fully ripe or slightly overripe. The color of the olives will depend on the variety, but in general, ripe olives for oil production will be a mix of green and purple or black.",
+    "Pickling: Olives for pickling can be harvested at different stages of ripeness, depending on the desired flavor and texture. For example, green olives are typically harvested when they are still unripe and firm, while black olives are harvested when they are fully ripe and softer.",
+  ],//Done but a bit tricky
   orange: [
     "check its color - should be bright orange",
     "give it a gentle squeeze - should have a little give",
     "smell it - should have a sweet, citrusy aroma",
-  ],
+  ],//Done
   papaya: [
-    "check its color - should be bright orange",
-    "give it a gentle squeeze - should have a little give",
-    "smell it - should have a sweet, citrusy aroma",
-  ],
+    "check its color - should have a bright orange color on the skin. Some varieties may have yellow or pink hues, but the overall color should be vibrant and even",
+    "Shape - A ripe papaya should be uniformly shaped and free of any dents or soft spots",
+    "Seed cavity - Cut the papaya in half lengthwise and check the seed cavity. The seeds should be dark and scooped out easily. If the seeds are white or difficult to remove, the papaya may not be ripe.",
+  ],//Done
   pea: [
-    "check its color - should be bright orange",
-    "give it a gentle squeeze - should have a little give",
-    "smell it - should have a sweet, citrusy aroma",
-  ],
+    "Appearance - A ripe pea pod should be plump and firm to the touch, with no wrinkles or discoloration. The pods should be bright green in color and have a glossy or shiny surface.",
+    "Texture - When you open the pea pod, the peas should be fully formed and round. They should not be too small or too large, and they should have a tender texture.",
+    "Taste it - The best way to determine if a pea is ripe is to taste it. A ripe pea should be sweet and tender, with a slightly crisp texture",
+  ],//Done
   pear: [
-    "check its color - should be bright orange",
-    "give it a gentle squeeze - should have a little give",
-    "smell it - should have a sweet, citrusy aroma",
-  ],
+    "Pressure test - Apply gentle pressure to the neck of the pear with your thumb. If it yields to gentle pressure, the pear is ripe. If it's hard or too soft, it may not be fully ripe",
+    "give it a gentle squeeze - should be slightly soft to the touch, especially near the stem. The flesh should yield slightly when pressed but should not be too mushy. The skin should be smooth and free of any bruises or blemishes",
+    "smell it - should have a sweet and fruity aroma. If it doesn't smell like anything or has a musty smell, it may not be ripe.",
+  ],//Done 
   pineapple: [
-    "check its color - should be bright orange",
-    "give it a gentle squeeze - should have a little give",
-    "smell it - should have a sweet, citrusy aroma",
-  ],
+    "check the sound - Hold the pineapple up to your ear and thump it with your knuckles. A ripe pineapple will produce a deep, hollow sound",
+    "Tug the leaves - Gently tug on one of the leaves at the top of the pineapple. If it comes out easily, the pineapple is ripe. If it's difficult to remove, the pineapple may not be fully ripe yet",
+    "smell it - should have a sweet, tropical aroma that is easily detectable when you sniff the base of the fruit.",
+  ],//Done 
   pomegranate: [
-    "check its color - should be bright orange",
-    "give it a gentle squeeze - should have a little give",
-    "smell it - should have a sweet, citrusy aroma",
-  ],
+    "check its color - should have a deep, rich red color, pomegranates with yellow or green patches are not fully ripe",
+    "Shape - A ripe pomegranate should be round and plump, with no visible dents or wrinkles",
+    "Sound - Gently tap the pomegranate with your fingers. A ripe pomegranate will make a deep, metallic sound, while an underripe one will make a dull sound",
+  ],//Done
   raspberry: [
-    "check its color - should be bright orange",
-    "give it a gentle squeeze - should have a little give",
-    "smell it - should have a sweet, citrusy aroma",
-  ],
+    "check its color - Should be brightly colored and have an even color distribution, should not have any white or green areas.",
+    "give it a gentle squeeze - should be firm but tender to the touch, not soft or mushy",
+    "smell it - Should have a strong, sweet aroma. If it doesn't smell like anything or has a sour smell, it may not be ripe",
+  ],//Done
   strawberry: [
-    "check its color - should be bright orange",
-    "give it a gentle squeeze - should have a little give",
-    "smell it - should have a sweet, citrusy aroma",
-  ],
+    "check its color - Should be bright red all over. Any white or green areas, the strawberry is not yet ripe.",
+    "give it a gentle squeeze - should be firm but tender to the touch, not soft or mushy",
+    "smell it - Should have a strong, sweet aroma. If it doesn't smell like anything or has a sour smell, it may not be ripe",
+  ],//Done
   tomato: [
-    "check its color - should be bright orange",
-    "give it a gentle squeeze - should have a little give",
-    "smell it - should have a sweet, citrusy aroma",
-  ],
+    "Texture - Should be firm but slightly soft to the touch, with a slight give when you press gently on it. The skin should be smooth and taut, with no wrinkles or cracks.",
+    "Taste - The best way to determine if a tomato is ripe is to taste it. A ripe tomato should have a sweet and tangy flavor, with a juicy and tender flesh.",
+    "Smell - A ripe tomato will have a strong, sweet, and slightly earthy aroma.",
+  ],//Done
   vanilla: [
-    "check its color - should be bright orange",
-    "give it a gentle squeeze - should have a little give",
-    "smell it - should have a sweet, citrusy aroma",
-  ],
+    "Check its color - should be bright orange",
+    "Length - should be atleast 15cm long",
+    "Appearence - plump and evenly colored, with a glossy or shiny surface",
+  ],//Done
   watermelon: [
-    "check its color - should be bright orange",
-    "give it a gentle squeeze - should have a little give",
-    "smell it - should have a sweet, citrusy aroma",
-  ],
+    "Sound - Give the watermelon a top it should give a deep, hollow sound",
+    "Color - watermelon that has a uniform, dark green color with a dull or matte finish. The underside should have a creamy or yellowish spot",
+    "Textrure - Check the surface of the watermelon for any irregularities or soft spots. It should be firm and free of blemishes",
+  ], //Done
   zucchini: [
-    "check its color - should be bright orange",
-    "give it a gentle squeeze - should have a little give",
-    "smell it - should have a sweet, citrusy aroma",
-  ],
+    "Check its size - should be between 15 to 20 cm in length and 2 inches in diameter",
+    "Give it a gentle squeeze - should have a little give but not mushy",
+    "Check its color - dark green in color, some can have lighter or yellow-green skin ",
+  ], //done
 }
 
 export default fruitRipenessInfo
