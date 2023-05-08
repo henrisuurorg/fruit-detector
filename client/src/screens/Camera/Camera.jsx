@@ -1,7 +1,14 @@
 import { Camera, FlashMode } from "expo-camera"
 import * as ImagePicker from "expo-image-picker"
 import { useState, useEffect, useRef } from "react"
-import { Button, Text, TouchableOpacity, View, Image, Platform } from "react-native"
+import {
+  Button,
+  Text,
+  TouchableOpacity,
+  View,
+  Image,
+  Platform,
+} from "react-native"
 import { useIsFocused } from "@react-navigation/native"
 import getAspectRatio from "../../utils/getAspectRatio.js"
 import findBestMatchingAspectRatio from "../../utils/findBestMatchingAspectRatio.js"
@@ -9,15 +16,37 @@ import CameraStyles from "./Camera.styles.js"
 import flashOnIcon from "../../../assets/flashOnIcon.png"
 import flashOffIcon from "../../../assets/flashOffIcon.png"
 import galleryIcon from "../../../assets/galleryIcon.png"
+import {
+  PinchGestureHandler,
+  GestureHandlerRootView,
+} from "react-native-gesture-handler"
 
 const CameraScreen = ({ navigation }) => {
   const [permission, requestPermission] = Camera.useCameraPermissions()
   const [cameraRatio, setCameraRatio] = useState()
   const [isCameraReady, setIsCameraReady] = useState(false)
   const [flash, setFlash] = useState(FlashMode.off)
-
+  const [zoom, setZoom] = useState(0)
   const cameraRef = useRef()
   const isFocused = useIsFocused()
+
+  const onPinchGestureEvent = (nativeEvent) => {
+    const { scale } = nativeEvent.nativeEvent
+    const velocity = nativeEvent.nativeEvent.velocity / 20
+
+    const zoomInMultiplier = Platform.OS === "ios" ? 0.01 : 25
+    const zoomOutMultiplier = Platform.OS === "ios" ? 0.02 : 75 // Adjust this value for Android
+
+    let newZoom =
+      velocity > 0
+        ? zoom + scale * velocity * zoomInMultiplier
+        : zoom - scale * Math.abs(velocity) * zoomOutMultiplier
+
+    if (newZoom < 0) newZoom = 0
+    else if (newZoom > 0.5) newZoom = 0.5
+
+    setZoom(newZoom)
+  }
 
   const onCameraReady = () => {
     setIsCameraReady(true)
@@ -52,7 +81,7 @@ const CameraScreen = ({ navigation }) => {
   useEffect(() => {
     const setBestMatchingRatio = async () => {
       const aspectRatio = getAspectRatio()
-      if (Platform.OS == 'android') {
+      if (Platform.OS == "android") {
         if (cameraRef.current && isCameraReady) {
           const supportedRatios =
             await cameraRef.current.getSupportedRatiosAsync()
@@ -99,7 +128,7 @@ const CameraScreen = ({ navigation }) => {
   }
 
   return (
-    <View style={CameraStyles.container}>
+    <GestureHandlerRootView style={CameraStyles.container}>
       {isFocused && (
         <Camera
           style={CameraStyles.camera}
@@ -107,36 +136,41 @@ const CameraScreen = ({ navigation }) => {
           ratio={cameraRatio}
           onCameraReady={onCameraReady}
           flashMode={flash}
+          zoom={zoom}
         >
-          <View style={CameraStyles.buttonContainer}>
-            <TouchableOpacity
-              style={CameraStyles.iconButton}
-              onPress={pickImage}
-            >
-              <Image source={galleryIcon} style={CameraStyles.icon} />
-            </TouchableOpacity>
+          <PinchGestureHandler onGestureEvent={onPinchGestureEvent}>
+            <View style={CameraStyles.overlay}>
+              <View style={CameraStyles.buttonContainer}>
+                <TouchableOpacity
+                  style={CameraStyles.iconButton}
+                  onPress={pickImage}
+                >
+                  <Image source={galleryIcon} style={CameraStyles.icon} />
+                </TouchableOpacity>
 
-            <View style={CameraStyles.captureButtonWrapper}>
-              <TouchableOpacity
-                onPress={takePic}
-                style={CameraStyles.captureButton}
-              ></TouchableOpacity>
+                <View style={CameraStyles.captureButtonWrapper}>
+                  <TouchableOpacity
+                    onPress={takePic}
+                    style={CameraStyles.captureButton}
+                  ></TouchableOpacity>
+                </View>
+
+                <TouchableOpacity
+                  style={CameraStyles.iconButton}
+                  onPress={toggleFlash}
+                >
+                  {flash === FlashMode.off ? (
+                    <Image source={flashOffIcon} style={CameraStyles.icon} />
+                  ) : (
+                    <Image source={flashOnIcon} style={CameraStyles.icon} />
+                  )}
+                </TouchableOpacity>
+              </View>
             </View>
-
-            <TouchableOpacity
-              style={CameraStyles.iconButton}
-              onPress={toggleFlash}
-            >
-              {flash === FlashMode.off ? (
-                <Image source={flashOffIcon} style={CameraStyles.icon} />
-              ) : (
-                <Image source={flashOnIcon} style={CameraStyles.icon} />
-              )}
-            </TouchableOpacity>
-          </View>
+          </PinchGestureHandler>
         </Camera>
       )}
-    </View>
+    </GestureHandlerRootView>
   )
 }
 

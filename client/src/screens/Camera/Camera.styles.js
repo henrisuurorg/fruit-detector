@@ -41,6 +41,10 @@ const CameraStyles = StyleSheet.create({
     borderRadius: 35,
     backgroundColor: "white",
   },
+  overlay: {
+    flex: 1,
+    justifyContent: "flex-end",
+  },
 })
 
 export default CameraStyles
