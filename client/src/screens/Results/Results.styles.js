@@ -3,9 +3,6 @@ import { StyleSheet } from "react-native"
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#121212",
-    flex: 1,
-    paddingVertical: 40,
-    paddingHorizontal: 20,
   },
   innerContainer: {
     backgroundColor: "#404040",
@@ -13,6 +10,10 @@ const styles = StyleSheet.create({
     padding: 20,
     marginTop: 20,
   },
+  padding: {
+    paddingVertical: 40,
+    paddingHorizontal: 20,
+  }
 })
 
 export default styles
