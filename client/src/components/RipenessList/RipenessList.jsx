@@ -4,11 +4,17 @@ import fruitRipenessInfo from "../../utils/fruitRipenessInfo"
 import addArticle from "../../utils/addArticle"
 import RipenessListStyles from "./RipenessList.styles"
 
-const renderItem = (item) => (
-  <BaseText key={item} style={RipenessListStyles.renderItem}>
-    {`\u2022 ${item}`}
-  </BaseText>
-)
+const renderItem = (item) => {
+  const [beforeHyphen, afterHyphen] = item.split(" - ")
+
+  return (
+    <BaseText key={item} style={RipenessListStyles.renderItem}>
+      {`\u2022 ${beforeHyphen}`}
+      {" - "}
+      <BaseText style={{ fontWeight: "300" }}>{afterHyphen}</BaseText>
+    </BaseText>
+  )
+}
 
 const AltFruitList = ({ fruit, ripeness }) => {
   return (
