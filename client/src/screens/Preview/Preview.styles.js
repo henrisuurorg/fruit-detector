@@ -42,6 +42,15 @@ const styles = StyleSheet.create({
     height: "100%",
     resizeMode: "contain",
   },
+  loadingContainer: {
+    position: "absolute",
+    backgroundColor: "transparent",
+    zIndex: 1000,
+  },
+  loadingIcon: {
+    flex: 1,
+    justifyContent: "center",
+  }
 })
 
 export default styles

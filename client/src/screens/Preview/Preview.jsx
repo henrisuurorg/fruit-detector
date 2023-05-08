@@ -3,6 +3,7 @@ import {
   View,
   Image,
   Dimensions,
+  ActivityIndicator,
 } from "react-native"
 import React, { useState } from "react"
 import PreviewStyles from "./Preview.styles"
@@ -23,11 +24,16 @@ const initialLength = 200
 const Preview = ({ navigation, route }) => {
   const [position, setPosition] = useState({ x: startX, y: startY })
   const [squareLength, setLength] = useState(initialLength)
+  const [buttonDisabled, setButtonDisabled] = useState(false)
+
 
   const cropImage = async () => {
     //crop the image and send to the server and then navigate to the result screen
 
-    //crop the image
+    // Disable the button
+    setButtonDisabled(true)
+
+    // Crop the image
     let newPhoto = await ImageCropper(
       (photo = route.params.photo),
       (x = position.x),
@@ -35,7 +41,7 @@ const Preview = ({ navigation, route }) => {
       (length = squareLength)
     )
 
-    //upload to server
+    // Upload to server
     uploadImage(newPhoto)
       .then((fruit) => {
         navigation.navigate("Results", {
@@ -43,6 +49,7 @@ const Preview = ({ navigation, route }) => {
           fruit: fruit,
           image: newPhoto,
         })
+        setButtonDisabled(false)
       })
       .catch((error) => {
         console.debug(error)
@@ -68,8 +75,14 @@ const Preview = ({ navigation, route }) => {
               id="Confirm Button"
               style={PreviewStyles.iconButton}
               onPress={cropImage}
-            >
-              <Image source={confirmButton} style={PreviewStyles.icon} />
+              disabled={buttonDisabled}
+            > 
+              {buttonDisabled ? 
+                (<Image source={confirmButton} style={[PreviewStyles.icon, {opacity: 0.35}]} />)
+                : 
+                (<Image source={confirmButton} style={PreviewStyles.icon} />)
+              }
+              
             </TouchableOpacity>
       </View>
       <MovableSquare
@@ -78,8 +91,14 @@ const Preview = ({ navigation, route }) => {
         squareLength={initialLength}
         setSquareLength={setLength}
         photo={route.params.photo}
-      >
-      </MovableSquare>
+      />
+      {buttonDisabled ? 
+        (
+        <View style={[PreviewStyles.loadingContainer, {top: (position.y - (squareLength / 2)), left: position.x - (squareLength / 2), width: squareLength, height: squareLength}]}>
+            <ActivityIndicator size="large" color="#ffffff" style={PreviewStyles.loadingIcon} scale={5} />
+        </View>
+        ): null
+      }
     </View>
   )
 }
