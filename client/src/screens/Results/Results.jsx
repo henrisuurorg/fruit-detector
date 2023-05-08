@@ -18,87 +18,44 @@ const ResultScreen = ({ navigation, route }) => {
     ? result["ripeness"]["prediction"].class
     : null
 
-
   return (
-    <View style={{ flex:1, backgroundColor:"gray"}}>
-      <ScrollView style={ResultsStyles.container} contentContainerStyle={ResultsStyles.padding}>
-        <BaseText
-            style={{
-              fontSize: 40,
-              textTransform: "capitalize",
-              fontWeight: "400",
-              marginTop: 20,
-            }}
-          >{`${fruitEmojis[fruit]} ${fruit}`}
-          </BaseText>
-        
+    <View style={{ flex: 1 }}>
+      <ScrollView
+        style={ResultsStyles.container}
+        contentContainerStyle={ResultsStyles.padding}
+      >
+        <BaseText style={ResultsStyles.title}>
+          {`${fruitEmojis[fruit]} ${fruit}`}
+        </BaseText>
+
         <View style={ResultsStyles.innerContainer}>
           <AltFruitList fruit={fruit} alts={alts} confi={confi} />
         </View>
-          
+
         <View style={ResultsStyles.innerContainer}>
           <RipenessList fruit={fruit} ripeness={ripen} />
         </View>
 
         <View style={ResultsStyles.innerContainer}>
           <BaseText>Want to scan again?</BaseText>
-            <BaseText style={{ marginTop: 10 }}>
-              Not the result you are looking for?
-            </BaseText>
-            <ResultButton
-              title="Back to Camera"
-              onPress={() => navigation.navigate("Camera")}
-              style={{ marginTop: 20 }}
-              icon={backToCameraIcon}
-            />
-            <ResultButton
-              title="Crop Again"
-              onPress={() => navigation.goBack()}
-              style={{ marginTop: 10 }}
-              icon={cropAgainIcon}
-            />
+          <BaseText style={{ marginTop: 10 }}>
+            Not the result you are looking for?
+          </BaseText>
+          <ResultButton
+            title="Back to Camera"
+            onPress={() => navigation.navigate("Camera")}
+            style={{ marginTop: 20 }}
+            icon={backToCameraIcon}
+          />
+          <ResultButton
+            title="Crop Again"
+            onPress={() => navigation.goBack()}
+            style={{ marginTop: 10 }}
+            icon={cropAgainIcon}
+          />
         </View>
       </ScrollView>
     </View>
-  );
-
-
-
-  return (
-    <ScrollView style={ResultsStyles.container} contentContainerStyle={{flexGrow: 1}}>
-      <BaseText
-        style={{
-          fontSize: 40,
-          textTransform: "capitalize",
-          fontWeight: "400",
-          marginTop: 40,
-        }}
-      >{`${fruitEmojis[fruit]} ${fruit}`}</BaseText>
-      <View style={ResultsStyles.innerContainer}>
-        <AltFruitList fruit={fruit} alts={alts} confi={confi} />
-      </View>
-      <View style={ResultsStyles.innerContainer}>
-        <RipenessList fruit={fruit} ripeness={ripen} />
-      </View>
-      <View style={ResultsStyles.innerContainer}>
-        <BaseText>Want to scan again?</BaseText>
-        <BaseText style={{ marginTop: 10 }}>
-          Not the result you are looking for?
-        </BaseText>
-        <ResultButton
-          title="Back to Camera"
-          onPress={() => navigation.navigate("Camera")}
-          style={{ marginTop: 20 }}
-          icon={backToCameraIcon}
-        />
-        <ResultButton
-          title="Crop Again"
-          onPress={() => navigation.goBack()}
-          style={{ marginTop: 10 }}
-          icon={cropAgainIcon}
-        />
-      </View>
-    </ScrollView>
   )
 }
 export default ResultScreen

@@ -2,9 +2,10 @@ import { View } from "react-native"
 import BaseText from "../BaseText/BaseText"
 import fruitRipenessInfo from "../../utils/fruitRipenessInfo"
 import addArticle from "../../utils/addArticle"
+import RipenessListStyles from "./RipenessList.styles"
 
 const renderItem = (item) => (
-  <BaseText key={item} style={{ fontWeight: "400", marginTop: 5 }}>
+  <BaseText key={item} style={RipenessListStyles.renderItem}>
     {`\u2022 ${item}`}
   </BaseText>
 )

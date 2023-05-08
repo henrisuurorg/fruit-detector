@@ -13,7 +13,13 @@ const styles = StyleSheet.create({
   padding: {
     paddingVertical: 40,
     paddingHorizontal: 20,
-  }
+  },
+  title: {
+    fontSize: 40,
+    textTransform: "capitalize",
+    fontWeight: "400",
+    marginTop: 20,
+  },
 })
 
 export default styles
