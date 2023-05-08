@@ -10,6 +10,7 @@ const borderWidth = 2
 const MovableSquare = ({ position, setPosition, squareLength, setSquareLength, photo }) => {
   const [scale, setScale] = useState(1)
   const [scaledLength, setScaleLength] = useState(squareLength)
+  const [cooldown, setCooldown] = useState(0)
 
   const panResponder = PanResponder.create({
     onMoveShouldSetPanResponder: () => true,
@@ -32,6 +33,7 @@ const MovableSquare = ({ position, setPosition, squareLength, setSquareLength, p
             Math.pow(point2.x - point1.x, 2) + Math.pow(point2.y - point1.y, 2)
           )
           const newScale = Math.max(0.6, Math.min(distance / squareLength, 10))
+          setCooldown(15)
           setScale(newScale)
         }
         catch (error){
@@ -47,17 +49,23 @@ const MovableSquare = ({ position, setPosition, squareLength, setSquareLength, p
       setSquareLength(tmp)
       setScaleLength(tmp)
 
-      //Move the square to the center of the tocuhEvent
-      let x = gestureState.moveX
-      let y = gestureState.moveY
-      // Prevent the box from going outside of the screen
-      if (x - scaledLength / 2 < 0) x = scaledLength / 2
-      if (y - scaledLength / 2 < 0) y = scaledLength / 2
-      if (x + scaledLength / 2 > window_width)
-        x = window_width - scaledLength / 2
-      if (y + scaledLength / 2 > window_height)
-        y = window_height - scaledLength / 2
-      setPosition({ x, y })
+      if (evt.touchHistory.numberActiveTouches != 2 && cooldown > 0) {
+        tmp = cooldown - 1
+        setCooldown(tmp)
+      }
+      else {
+        //Move the square to the center of the tocuhEvent
+        let x = gestureState.moveX
+        let y = gestureState.moveY
+        // Prevent the box from going outside of the screen
+        if (x - scaledLength / 2 < 0) x = scaledLength / 2
+        if (y - scaledLength / 2 < 0) y = scaledLength / 2
+        if (x + scaledLength / 2 > window_width)
+          x = window_width - scaledLength / 2
+        if (y + scaledLength / 2 > window_height)
+          y = window_height - scaledLength / 2
+        setPosition({ x, y })
+      }
     },
   })
   return (
