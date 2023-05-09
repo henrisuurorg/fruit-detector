@@ -1,4 +1,4 @@
-import { Text } from "react-native"
+import { Text, Platform } from "react-native"
 import BaseTextStyles from "./BaseText.styles"
 
 const BaseText = ({ children, style }) => {
