@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     borderColor: "white",
     backgroundColor: "transparent",
+    borderRadius: 10,
     overflow: 'hidden',
     zIndex: 5
   },

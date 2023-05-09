@@ -8,6 +8,7 @@ import ResultButton from "../../components/ResultButton/ResultButton"
 import backToCameraIcon from "../../../assets/backToCameraIcon.png"
 import cropAgainIcon from "../../../assets/cropAgainIcon.png"
 import Icon from "../../components/FruitIcon/FruitIcon"
+import { StatusBar } from "expo-status-bar"
 
 const ResultScreen = ({ navigation, route }) => {
   const result = JSON.parse(route.params.fruit)
@@ -20,6 +21,7 @@ const ResultScreen = ({ navigation, route }) => {
 
   return (
     <View style={{ flex: 1 }}>
+      <StatusBar style="auto"/>
       <ScrollView
         style={ResultsStyles.container}
         contentContainerStyle={ResultsStyles.padding}

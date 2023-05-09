@@ -49,7 +49,11 @@ const styles = StyleSheet.create({
   },
   loadingIcon: {
     flex: 1,
-    justifyContent: "center",
+    position: "absolute",
+    height: "10%",
+    width: "10%",
+    left: "45%",
+    top: "45%"
   }
 })
 

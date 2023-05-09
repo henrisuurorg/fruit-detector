@@ -5,16 +5,9 @@ import Icon from "../FruitIcon/FruitIcon"
 import addArticle from "../../utils/addArticle"
 
 const renderItem = (item, showConf) => (
-  <View
-    style={[
-      {
-        flexDirection: "row",
-        alignContent: "flex-start",
-      },
-    ]}
-  >
+  <View key={item.class} style={[{flexDirection: "row", alignContent: "flex-start",}]}>
     <Icon fruitName={item.class} sideLength={28} />
-    <BaseText key={item.class} style={{ alignSelf: "center" }}>
+    <BaseText style={{ alignSelf: "center" }}>
       {item.class} {showConf && " (" + item.confidence + ")"}
     </BaseText>
   </View>

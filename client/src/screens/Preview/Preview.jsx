@@ -10,9 +10,11 @@ import PreviewStyles from "./Preview.styles"
 import MovableSquare from "../../components/MovableSquare/MovableSquare.jsx"
 import ImageCropper from "../../utils/ImageCropper.js"
 import uploadImage from "../../utils/uploadImage"
+import { StatusBar } from "expo-status-bar"
 
 import confirmButton from "../../../assets/preview_ok_button.png"
 import returnButton from "../../../assets/preview_return_button.png"
+
 
 const window_width = Dimensions.get("screen").width
 const window_height = Dimensions.get("screen").height
@@ -57,6 +59,7 @@ const Preview = ({ navigation, route }) => {
   }
   return (
     <View style={PreviewStyles.container}>
+      <StatusBar style="auto"/>
       <Image
         style={PreviewStyles.preview}
         source={{ uri: "data:image/jpg;base64," + route.params.photo.base64 }}

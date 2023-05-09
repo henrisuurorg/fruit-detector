@@ -20,6 +20,7 @@ import {
   PinchGestureHandler,
   GestureHandlerRootView,
 } from "react-native-gesture-handler"
+import { StatusBar } from "expo-status-bar"
 
 const CameraScreen = ({ navigation }) => {
   const [permission, requestPermission] = Camera.useCameraPermissions()

@@ -1,0 +1,19 @@
+{
+    "build": {
+      "FruitSpy": {
+        "android": {
+          "buildType": "apk"
+        }
+      },
+      "FruitSpy2": {
+        "android": {
+          "gradleCommand": ":app:assembleRelease"
+        }
+      },
+      "FruitSpy3": {
+        "developmentClient": true
+      },
+      "production": {}
+    }
+  }
+  

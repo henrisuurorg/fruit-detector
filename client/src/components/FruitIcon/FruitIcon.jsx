@@ -37,6 +37,7 @@ import tomato from "../../../assets/fruit_icons/tomato.png"
 //import vanilla from "../../../assets/fruit_icons/vanilla.png"
 import watermelon from "../../../assets/fruit_icons/watermelon.png"
 //import zucchini from "../../../assets/fruit_icons/zucchini.png"
+import defaultIcon from "../../../assets/fruit_icons/default_icon.png"
 
 const FruitIcon = ({ fruitName, sideLength }) => {
   const fruitIcons = {
@@ -51,31 +52,31 @@ const FruitIcon = ({ fruitName, sideLength }) => {
     blueberry: blueberry,
     cherry: cherry,
     clementine: orange,
-    cloudberry: grape,
-    cranberry: grape,
-    dragonfruit: grape,
+    cloudberry: defaultIcon,
+    cranberry: defaultIcon,
+    dragonfruit: defaultIcon,
     eggplant: eggplant,
-    elderberry: grape,
-    gooseberry: grape,
+    elderberry: defaultIcon,
+    gooseberry: defaultIcon,
     kiwi: kiwi,
     lemon: lemon,
     lime: lemon,
-    lingonberry: grape,
+    lingonberry: defaultIcon,
     mango: mango,
     nectarine: apricot,
-    olive: grape,
+    olive: defaultIcon,
     orange: orange,
     papaya: papaya,
-    pea: grape,
+    pea: defaultIcon,
     pear: pear,
     pineapple: pineapple,
     pomegranate: pomegranate,
     raspberry: raspberry,
     strawberry: strawberry,
     tomato: tomato,
-    vanilla: grape,
+    vanilla: defaultIcon,
     watermelon: watermelon,
-    zucchini: grape,
+    zucchini: defaultIcon,
   }
 
   const fruitIconSource = fruitIcons[fruitName] || null
