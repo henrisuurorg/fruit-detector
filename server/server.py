@@ -1,6 +1,5 @@
 from flask import Flask, request
 import tensorflow as tf
-import logging
 from io import BytesIO
 
 from utils.predict import predict_image  # Import the predict_image function
