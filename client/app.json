@@ -2,7 +2,7 @@
   "expo": {
     "name": "FruitSpy",
     "slug": "FruitSpy",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "plugins": [
       [
         "expo-image-picker",
@@ -17,7 +17,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#f4ffae"
     },
     "assetBundlePatterns": [
       "**/*"

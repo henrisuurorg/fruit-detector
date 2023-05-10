@@ -17,6 +17,8 @@ const renderItem = (item) => {
 }
 
 const AltFruitList = ({ fruit, ripeness }) => {
+  const ripenessInfo = fruitRipenessInfo[fruit] || ["No information found - Something went wrong with fetching the data. Deal with it."]
+  
   return (
     <View>
       {ripeness ? (
@@ -34,7 +36,7 @@ const AltFruitList = ({ fruit, ripeness }) => {
       <BaseText style={{ marginTop: 20 }}>
         To identify if {addArticle(fruit)} is ripe:
       </BaseText>
-      {fruitRipenessInfo[fruit].map(renderItem)}
+      {ripenessInfo.map(renderItem)}
     </View>
   )
 }
