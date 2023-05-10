@@ -5,7 +5,7 @@ import apple from "../../../assets/fruit_icons/apple.png"
 import avocado from "../../../assets/fruit_icons/avocado.png"
 import banana from "../../../assets/fruit_icons/banana.png"
 import bell_pepper from "../../../assets/fruit_icons/bell_pepper.png"
-import black_berry from "../../../assets/fruit_icons/black_berry.png"
+import black_berry from "../../../assets/fruit_icons/blackberry.png"
 import blueberry from "../../../assets/fruit_icons/blueberry.png"
 import coconut from "../../../assets/fruit_icons/coconut.png"
 import cherry from "../../../assets/fruit_icons/cherry.png"
@@ -28,12 +28,11 @@ import nectarine from "../../../assets/fruit_icons/nectarine.png"
 import olive from "../../../assets/fruit_icons/olive.png"
 import orange from "../../../assets/fruit_icons/orange.png"
 import papaya from "../../../assets/fruit_icons/papaya.png"
-import pea from "../../../assets/fruit_icons/pea.png"
 import pear from "../../../assets/fruit_icons/pear.png"
 import passion_fruit from "../../../assets/fruit_icons/passion_fruit.png"
- import physalis from "../../../assets/fruit_icons/physalis.png"
+import physalis from "../../../assets/fruit_icons/physalis.png"
 import pineapple from "../../../assets/fruit_icons/pineapple.png"
- import pumpkin from "../../../assets/fruit_icons/pumpkin.png"
+import pumpkin from "../../../assets/fruit_icons/pumpkin.png"
 import raspberry from "../../../assets/fruit_icons/raspberry.png"
 import strawberry from "../../../assets/fruit_icons/strawberry.png"
 import tomato from "../../../assets/fruit_icons/tomato.png"
@@ -47,40 +46,40 @@ const FruitIcon = ({ fruitName, sideLength }) => {
     avocado: avocado,
     banana: banana,
     "bell pepper": bell_pepper,
-    //"black berry": black_berry,
+    "black berry": black_berry,
     blueberry: blueberry,
     cherry: cherry,
     clementine: orange,
     coconut: coconut,
-    //cranberry: cranberry,
-    // date: date,
-    //dragonfruit: dragonfruit,
+    cranberry: cranberry,
+    //date: date,
+    dragonfruit: dragonfruit,
     durian: durian,
     eggplant: eggplant,
-    // fig: fig,
+    fig: fig,
     grape: grape,
-    // grapefruit: grapefruit,
-    // guava: guava,
+    grapefruit: grapefruit,
+    guava: guava,
     jalapeno: jalapeno,
     kiwi: kiwi,
     lemon: lemon,
-    //lime: lime,
-    // lychee: lychee,
+    lime: lime,
+    lychee: lychee,
     mango: mango,
     nectarine: nectarine,
-    //olive: olive,
+    olive: olive,
     orange: orange,
     papaya: papaya,
-    // "passion fruit": passion_fruit,
+    "passion fruit": passion_fruit,
     pear: pear,
-    // physalis: physalis,
+    physalis: physalis,
     pineapple: pineapple,
-    // pumpkin: pumpkin,
+    pumpkin: pumpkin,
     raspberry: raspberry,
     strawberry: strawberry,
     tomato: tomato,
     watermelon: watermelon,
-    //zucchini: zucchini,
+    zucchini: zucchini,
   }
 
   const fruitIconSource = fruitIcons[fruitName] || defaultIcon
