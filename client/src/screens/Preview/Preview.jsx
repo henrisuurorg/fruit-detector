@@ -8,6 +8,7 @@ import {
 import React, { useState } from "react"
 import PreviewStyles from "./Preview.styles"
 import MovableSquare from "../../components/MovableSquare/MovableSquare.jsx"
+import AnimatedLoader from "../../components/AnimatedLoading/AnimatedLoading"
 import ImageCropper from "../../utils/ImageCropper.js"
 import uploadImage from "../../utils/uploadImage"
 import { StatusBar } from "expo-status-bar"
@@ -97,9 +98,7 @@ const Preview = ({ navigation, route }) => {
       />
       {buttonDisabled ? 
         (
-        <View style={[PreviewStyles.loadingContainer, {top: (position.y - (squareLength / 2)), left: position.x - (squareLength / 2), width: squareLength, height: squareLength}]}>
-            <ActivityIndicator size="large" color="#ffffff" style={PreviewStyles.loadingIcon} scale={5} />
-        </View>
+          <AnimatedLoader positionX={position.x} positionY={position.y} squareLength={squareLength} />
         ): null
       }
     </View>
