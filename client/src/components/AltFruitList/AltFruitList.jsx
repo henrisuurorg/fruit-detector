@@ -1,11 +1,16 @@
 import { TouchableOpacity, View } from "react-native"
-import { useState } from 'react'
+import { useState } from "react"
 import BaseText from "../BaseText/BaseText"
-import fruitEmojis from "../../utils/fruitEmojis"
+import Icon from "../FruitIcon/FruitIcon"
 import addArticle from "../../utils/addArticle"
 
 const renderItem = (item, showConf) => (
-  <BaseText key={item.class}>{`\t${fruitEmojis[item.class]} ${item.class}`} {showConf && " (" + item.confidence + ")"}</BaseText>
+  <View key={item.class} style={[{flexDirection: "row", alignContent: "flex-start",}]}>
+    <Icon fruitName={item.class} sideLength={28} />
+    <BaseText style={{ alignSelf: "center" }}>
+      {item.class} {showConf && " (" + item.confidence + ")"}
+    </BaseText>
+  </View>
 )
 
 const AltFruitList = ({ fruit, alts, confi }) => {
@@ -15,7 +20,7 @@ const AltFruitList = ({ fruit, alts, confi }) => {
   )
 
   const toggleConfidence = async () => {
-    setShowConf(!showConf);
+    setShowConf(!showConf)
   }
 
   return (
@@ -28,7 +33,7 @@ const AltFruitList = ({ fruit, alts, confi }) => {
         <View>
           <BaseText style={{ marginTop: 20 }}>It also could be...</BaseText>
           <TouchableOpacity onPress={() => toggleConfidence()}>
-          {altsSorted.map(item => renderItem(item, showConf))}
+            {altsSorted.map((item) => renderItem(item, showConf))}
           </TouchableOpacity>
           <BaseText style={{ marginVertical: 5 }}>
             or something completely different.

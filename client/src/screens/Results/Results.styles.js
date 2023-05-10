@@ -1,5 +1,7 @@
 import { StyleSheet } from "react-native"
 
+const paddingVertical = Platform.OS === "ios" ? 60 : 40
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#121212",
@@ -11,13 +13,13 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   padding: {
-    paddingVertical: 40,
+    paddingVertical: paddingVertical,
     paddingHorizontal: 20,
   },
   title: {
     fontSize: 40,
     textTransform: "capitalize",
-    fontWeight: "400",
+    fontWeight: "700",
     marginTop: 20,
   },
 })

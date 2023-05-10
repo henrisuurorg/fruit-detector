@@ -1,13 +1,14 @@
 import { View, ScrollView } from "react-native"
 import React from "react"
 import ResultsStyles from "./Results.styles"
-import fruitEmojis from "../../utils/fruitEmojis"
 import BaseText from "../../components/BaseText/BaseText"
 import AltFruitList from "../../components/AltFruitList/AltFruitList"
 import RipenessList from "../../components/RipenessList/RipenessList"
 import ResultButton from "../../components/ResultButton/ResultButton"
 import backToCameraIcon from "../../../assets/backToCameraIcon.png"
 import cropAgainIcon from "../../../assets/cropAgainIcon.png"
+import Icon from "../../components/FruitIcon/FruitIcon"
+import { StatusBar } from "expo-status-bar"
 
 const ResultScreen = ({ navigation, route }) => {
   const result = JSON.parse(route.params.fruit)
@@ -20,13 +21,22 @@ const ResultScreen = ({ navigation, route }) => {
 
   return (
     <View style={{ flex: 1 }}>
+      <StatusBar style="auto"/>
       <ScrollView
         style={ResultsStyles.container}
         contentContainerStyle={ResultsStyles.padding}
       >
-        <BaseText style={ResultsStyles.title}>
-          {`${fruitEmojis[fruit]} ${fruit}`}
-        </BaseText>
+        <View
+          style={[
+            {
+              flexDirection: "row",
+              alignContent: "flex-start",
+            },
+          ]}
+        >
+          <Icon fruitName={fruit} sideLength={58} />
+          <BaseText style={ResultsStyles.title}>{fruit}</BaseText>
+        </View>
 
         <View style={ResultsStyles.innerContainer}>
           <AltFruitList fruit={fruit} alts={alts} confi={confi} />

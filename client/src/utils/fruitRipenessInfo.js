@@ -15,8 +15,8 @@ const fruitRipenessInfo = {
     "Check its texture - should have bumpy texture",
   ],
   banana: [
-    "Check its color - ","Naturally ripened: should be dark yellow with some dark spots","Artificially ripened: should be lemon yellow with some dark spots",
-    "Check its stalk - ","Naturally ripened: should have a black or brown stalk","Artificially ripened: should have green stalk",
+    "Check its color - Naturally ripened should be dark yellow with some dark spots while an artificially ripened one should be lemon yellow with some dark spots",
+    "Check its stalk - Naturally ripened should have a black or brown stalk while an artificially ripened one should have green stalk",
   ],
   "bell pepper": [
     "Check its color - should be fully yellow, orange, or red",
