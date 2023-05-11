@@ -45,7 +45,7 @@ const Preview = ({ navigation, route }) => {
     )
 
     // Upload to server
-    uploadImage(newPhoto)
+/*     uploadImage(newPhoto)
       .then((fruit) => {
         navigation.navigate("Results", {
           navigation: this.navigation,
@@ -56,7 +56,7 @@ const Preview = ({ navigation, route }) => {
       })
       .catch((error) => {
         console.debug(error)
-      })
+      }) */
   }
   return (
     <View style={PreviewStyles.container}>
