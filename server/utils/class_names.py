@@ -3,6 +3,8 @@ ripeness_class_names = {
     "pineapple": ['overripe', 'ripe', 'unripe'],
     "orange": ['overripe', 'ripe', 'unripe'],
     "strawberry": ['overripe', 'ripe', 'unripe'],
+    "avocado": ['ripe', 'unripe'],
+    
 }
 
 # New Model Class Names
