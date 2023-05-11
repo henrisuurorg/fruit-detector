@@ -71,12 +71,19 @@ const CameraScreen = ({ navigation }) => {
     }
   }
 
-  const toggleIcon = () => {
+  const enableFlip = () => {
+    setShowFlip(!showFlip)
+    setCamType(CameraType.front)
+  }
+
+  const disableFlip = () => {
     setShowFlip(!showFlip)
     if (camType != CameraType.back) {
       setCamType(CameraType.back)
     }
   }
+
+
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -163,6 +170,7 @@ const CameraScreen = ({ navigation }) => {
                   <TouchableOpacity
                     style={CameraStyles.iconButton}
                     onPress={flipCamera}
+                    onLongPress={disableFlip}
                   >
                     <Image source={flipIcon} style={CameraStyles.icon} />
                   </TouchableOpacity>
@@ -170,6 +178,7 @@ const CameraScreen = ({ navigation }) => {
                   <TouchableOpacity
                     style={CameraStyles.iconButton}
                     onPress={pickImage}
+                    onLongPress={enableFlip}
                   >
                     <Image source={galleryIcon} style={CameraStyles.icon} />
                   </TouchableOpacity>
@@ -178,7 +187,6 @@ const CameraScreen = ({ navigation }) => {
                 <View style={CameraStyles.captureButtonWrapper}>
                   <TouchableOpacity
                     onPress={takePic}
-                    onLongPress={toggleIcon}
                     style={CameraStyles.captureButton}
                   ></TouchableOpacity>
                 </View>
