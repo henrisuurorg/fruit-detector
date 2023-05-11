@@ -1,4 +1,4 @@
-import { Camera, FlashMode } from "expo-camera"
+import { Camera, CameraType, FlashMode } from "expo-camera"
 import * as ImagePicker from "expo-image-picker"
 import { useState, useEffect, useRef } from "react"
 import {
@@ -9,6 +9,10 @@ import {
   Image,
   Platform,
 } from "react-native"
+import {
+  PinchGestureHandler,
+  GestureHandlerRootView,
+} from "react-native-gesture-handler"
 import { useIsFocused } from "@react-navigation/native"
 import getAspectRatio from "../../utils/getAspectRatio.js"
 import findBestMatchingAspectRatio from "../../utils/findBestMatchingAspectRatio.js"
@@ -16,17 +20,15 @@ import CameraStyles from "./Camera.styles.js"
 import flashOnIcon from "../../../assets/flashOnIcon.png"
 import flashOffIcon from "../../../assets/flashOffIcon.png"
 import galleryIcon from "../../../assets/galleryIcon.png"
-import {
-  PinchGestureHandler,
-  GestureHandlerRootView,
-} from "react-native-gesture-handler"
-import { StatusBar } from "expo-status-bar"
+import flipIcon from "../../../assets/flip_camera.png"
 
 const CameraScreen = ({ navigation }) => {
   const [permission, requestPermission] = Camera.useCameraPermissions()
   const [cameraRatio, setCameraRatio] = useState()
   const [isCameraReady, setIsCameraReady] = useState(false)
   const [flash, setFlash] = useState(FlashMode.off)
+  const [showFlip, setShowFlip] = useState(false)
+  const [camType, setCamType] = useState(CameraType.back)
   const [zoom, setZoom] = useState(0)
   const cameraRef = useRef()
   const isFocused = useIsFocused()
@@ -61,6 +63,20 @@ const CameraScreen = ({ navigation }) => {
     }
   }
 
+  const flipCamera = () => {
+    if (camType === CameraType.back) {
+      setCamType(CameraType.front)
+    } else {
+      setCamType(CameraType.back)
+    }
+  }
+
+  const toggleIcon = () => {
+    setShowFlip(!showFlip)
+    if (camType != CameraType.back) {
+      setCamType(CameraType.back)
+    }
+  }
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -138,20 +154,31 @@ const CameraScreen = ({ navigation }) => {
           onCameraReady={onCameraReady}
           flashMode={flash}
           zoom={zoom}
+          type={camType}
         >
           <PinchGestureHandler onGestureEvent={onPinchGestureEvent}>
             <View style={CameraStyles.overlay}>
               <View style={CameraStyles.buttonContainer}>
-                <TouchableOpacity
-                  style={CameraStyles.iconButton}
-                  onPress={pickImage}
-                >
-                  <Image source={galleryIcon} style={CameraStyles.icon} />
-                </TouchableOpacity>
+                {showFlip ? (
+                  <TouchableOpacity
+                    style={CameraStyles.iconButton}
+                    onPress={flipCamera}
+                  >
+                    <Image source={flipIcon} style={CameraStyles.icon} />
+                  </TouchableOpacity>
+                ):(
+                  <TouchableOpacity
+                    style={CameraStyles.iconButton}
+                    onPress={pickImage}
+                  >
+                    <Image source={galleryIcon} style={CameraStyles.icon} />
+                  </TouchableOpacity>
+                )}
 
                 <View style={CameraStyles.captureButtonWrapper}>
                   <TouchableOpacity
                     onPress={takePic}
+                    onLongPress={toggleIcon}
                     style={CameraStyles.captureButton}
                   ></TouchableOpacity>
                 </View>
