@@ -2,7 +2,7 @@
   "expo": {
     "name": "FruitSpy",
     "slug": "FruitSpy",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "plugins": [
       [
         "expo-image-picker",
