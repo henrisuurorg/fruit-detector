@@ -1,5 +1,5 @@
 
-const uploadImage = async (singleFile) => {
+const uploadImage = async (singleFile, useNew) => {
   //create promise for the race conditions in the app
   return new Promise((resolve, reject) => {
     console.debug("> Sending data")
@@ -12,6 +12,7 @@ const uploadImage = async (singleFile) => {
         type: 'image/jpeg',
         name: 'image.jpg'
       });
+      formData.append('useNew', useNew);
       url = "https://fruit-detector-4fuk.onrender.com/inference"
       fetch(url, {
       method: 'POST',

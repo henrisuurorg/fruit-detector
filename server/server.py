@@ -3,7 +3,7 @@ import tensorflow as tf
 from io import BytesIO
 
 from utils.predict import predict_image  # Import the predict_image function
-from utils.class_names import ripeness_class_names, detection_class_names  # Import the ripeness_class_names dictionary
+from utils.class_names import ripeness_class_names, detection_class_names_new, detection_class_names_old  # Import the ripeness_class_names dictionary
 
 app = Flask(__name__)
 
@@ -14,7 +14,21 @@ def index_message():
 @app.route('/inference', methods=['POST'])
 def predict():
     # Load the first detection model from the file
-    tflite_model_file = "models/detection.tflite"
+    try:
+        useNew = request.form.get('useNew')
+    except Exception as e:
+        print(f"failed to get useNew it remains false\n{e}")
+        useNew = 'false'
+
+
+    if (useNew == "true"):
+        tflite_model_file = "models/new_detection.tflite"
+        detection_class_names = detection_class_names_new
+    else:
+        tflite_model_file = "models/old_detection.tflite"
+        detection_class_names = detection_class_names_old
+
+
     interpreter = tf.lite.Interpreter(model_path=tflite_model_file)
 
     # Allocate tensors for the first model
@@ -60,4 +74,4 @@ def predict():
     return result
 
 #if __name__ == "__main__": 
-#   app.run(host="130.229.148.138", port="4242", debug=True)
+#   app.run(host="130.229.171.0", port="4242", debug=True)

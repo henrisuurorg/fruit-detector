@@ -3,7 +3,7 @@ import {
   View,
   Image,
   Dimensions,
-  ActivityIndicator,
+  Text,
 } from "react-native"
 import React, { useState } from "react"
 import PreviewStyles from "./Preview.styles"
@@ -28,6 +28,7 @@ const Preview = ({ navigation, route }) => {
   const [position, setPosition] = useState({ x: startX, y: startY })
   const [squareLength, setLength] = useState(initialLength)
   const [buttonDisabled, setButtonDisabled] = useState(false)
+  const [useNew, setUseNew] = useState(false)
 
 
   const cropImage = async () => {
@@ -45,7 +46,7 @@ const Preview = ({ navigation, route }) => {
     )
 
     // Upload to server
-    uploadImage(newPhoto)
+    uploadImage(newPhoto, useNew)
       .then((fruit) => {
         navigation.navigate("Results", {
           navigation: this.navigation,
@@ -58,6 +59,11 @@ const Preview = ({ navigation, route }) => {
         console.debug(error)
       })
   }
+
+  const changeModel = () => {
+    setUseNew(!useNew)
+  }
+
   return (
     <View style={PreviewStyles.container}>
       <StatusBar style="auto"/>
@@ -66,6 +72,9 @@ const Preview = ({ navigation, route }) => {
         source={{ uri: "data:image/jpg;base64," + route.params.photo.base64 }}
       />
       <View style={PreviewStyles.overlay}/>
+      <TouchableOpacity style={{position:'absolute',borderColor: 'white', borderWidth: 1, borderRadius: 15, top:"7%", backgroundColor: "transparent", alignSelf: "center"}} onPress={() => changeModel()}>
+        <Text style={{justifyContent: 'center', alignSelf: 'center', margin: 5, marginHorizontal: 15, color: 'white', fontSize: 15}}>{useNew ? 'New Model' : 'Old Model'}</Text>
+      </TouchableOpacity>
       <View style={PreviewStyles.buttonContainer}>
             <TouchableOpacity
               id="Return Button"
@@ -78,7 +87,7 @@ const Preview = ({ navigation, route }) => {
             <TouchableOpacity
               id="Confirm Button"
               style={PreviewStyles.iconButton}
-              onPress={cropImage}
+              onPress={() => cropImage()}
               disabled={buttonDisabled}
             > 
               {buttonDisabled ? 

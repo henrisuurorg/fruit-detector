@@ -11,13 +11,14 @@ import coconut from "../../../assets/fruit_icons/coconut.png"
 import cherry from "../../../assets/fruit_icons/cherry.png"
 import cranberry from "../../../assets/fruit_icons/cranberry.png"
 // import date from "../../../assets/fruit_icons/date.png"
+import pomegranate from "../../../assets/fruit_icons/pomegranate.png"
 import durian from "../../../assets/fruit_icons/durian.png"
 import dragonfruit from "../../../assets/fruit_icons/dragonfruit.png"
 import eggplant from "../../../assets/fruit_icons/eggplant.png"
 import fig from "../../../assets/fruit_icons/fig.png"
 import grape from "../../../assets/fruit_icons/grape.png"
 import grapefruit from "../../../assets/fruit_icons/grapefruit.png"
- import guava from "../../../assets/fruit_icons/guava.png"
+import guava from "../../../assets/fruit_icons/guava.png"
 import kiwi from "../../../assets/fruit_icons/kiwi.png"
 import jalapeno from "../../../assets/fruit_icons/jalapeno.png"
 import lemon from "../../../assets/fruit_icons/lemon.png"
@@ -72,6 +73,7 @@ const FruitIcon = ({ fruitName, sideLength }) => {
     papaya: papaya,
     "passion fruit": passion_fruit,
     pear: pear,
+    pomegranate: pomegranate,
     physalis: physalis,
     pineapple: pineapple,
     pumpkin: pumpkin,
