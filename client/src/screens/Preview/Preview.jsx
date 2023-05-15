@@ -72,8 +72,12 @@ const Preview = ({ navigation, route }) => {
         source={{ uri: "data:image/jpg;base64," + route.params.photo.base64 }}
       />
       <View style={PreviewStyles.overlay}/>
-      <TouchableOpacity style={{position:'absolute',borderColor: 'white', borderWidth: 1, borderRadius: 15, top:"7%", backgroundColor: "transparent", alignSelf: "center"}} onPress={() => changeModel()}>
-        <Text style={{justifyContent: 'center', alignSelf: 'center', margin: 5, marginHorizontal: 15, color: 'white', fontSize: 15}}>{useNew ? 'New Model' : 'Old Model'}</Text>
+      <TouchableOpacity style={PreviewStyles.modelButton} onPress={() => changeModel()} disabled={buttonDisabled}>
+        {buttonDisabled ? (
+          <Text style={[PreviewStyles.buttonText, {color: "rgba(255, 255, 255, 0.5)"}]}>{useNew ? 'New Model' : 'Old Model'}</Text>
+        ):(
+          <Text style={PreviewStyles.buttonText}>{useNew ? 'New Model' : 'Old Model'}</Text>
+        )}
       </TouchableOpacity>
       <View style={PreviewStyles.buttonContainer}>
             <TouchableOpacity

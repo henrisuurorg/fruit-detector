@@ -54,6 +54,24 @@ const styles = StyleSheet.create({
     width: "10%",
     left: "45%",
     top: "45%"
+  },
+  modelButton: {
+    position:'absolute',
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius: 15,
+    top:"7%",
+    backgroundColor: "transparent",
+    alignSelf: "center",
+    zIndex: 1000,
+  },
+  buttonText: {
+    justifyContent: 'center',
+    alignSelf: 'center',
+    margin: 5,
+    marginHorizontal: 15,
+    color: 'white',
+    fontSize: 15
   }
 })
 

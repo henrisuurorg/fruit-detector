@@ -5,19 +5,32 @@ import BaseText from "../../components/BaseText/BaseText"
 import AltFruitList from "../../components/AltFruitList/AltFruitList"
 import RipenessList from "../../components/RipenessList/RipenessList"
 import ResultButton from "../../components/ResultButton/ResultButton"
+import ErrorScreen from "../../components/ErrorScreen/ErrorScreen"
 import backToCameraIcon from "../../../assets/backToCameraIcon.png"
 import cropAgainIcon from "../../../assets/cropAgainIcon.png"
 import Icon from "../../components/FruitIcon/FruitIcon"
 import { StatusBar } from "expo-status-bar"
 
 const ResultScreen = ({ navigation, route }) => {
-  const result = JSON.parse(route.params.fruit)
-  const fruit = result["fruit"]
-  const confi = result["confidence"]
-  const alts = result["alts"]
-  const ripen = result["ripeness"]
-    ? result["ripeness"]["prediction"].class
-    : null
+  let fruit = null
+  let confi = null
+  let alts = null
+  let ripen = null
+  try {
+    const result = JSON.parse(route.params.fruit)
+    fruit = result["fruit"]
+    confi = result["confidence"]
+    alts = result["alts"]
+    ripen = result["ripeness"]
+      ? result["ripeness"]["prediction"].class
+      : null
+  }
+  catch (error) {
+    console.debug("\nFailed to parse response data!\n\n" + error )
+    return (
+      <ErrorScreen navigation={navigation} route={route}/>
+    )
+  }
 
   return (
     <View style={{ flex: 1 }}>
